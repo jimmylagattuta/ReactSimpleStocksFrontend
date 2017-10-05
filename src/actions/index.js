@@ -14,8 +14,12 @@ export const fetchStocks = () => {
 
 export const searchStock = (symbol) => {
 	console.log('symbol');
+	console.log(symbol);
  	const request = axios.post('http://localhost:3000/api/v1/stocks', {'symbol': symbol});
+ 	console.log('request', request);
 	return {
-		type: SEARCH_STOCK, payload: request
+		type: SEARCH_STOCK, 
+		payload: request
  	};
+
 };

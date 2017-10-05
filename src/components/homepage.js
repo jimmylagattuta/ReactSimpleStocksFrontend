@@ -4,7 +4,7 @@ import { fetchStocks } from '../actions';
 import { connect } from 'react-redux';
 
 
-import SearchBar from '../containers/search_bar';
+import SearchBar from './search_bar';
 
 class Homepage extends Component {
 	componentWillMount() {
@@ -17,7 +17,8 @@ class Homepage extends Component {
 
     	return (
     	  	<div className="Homepage">
-      		  <SearchBar />
+      		  <SearchBar>
+      		  </SearchBar>
     		</div>
     	);
   	}
