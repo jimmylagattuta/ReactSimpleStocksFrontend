@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 
 import SearchBar from './search_bar';
+import SignInSignUp from './signinsignup';
 
 class Homepage extends Component {
 	componentWillMount() {
@@ -17,6 +18,8 @@ class Homepage extends Component {
 
     	return (
     	  	<div className="Homepage">
+    	  	  <SignInSignUp>
+    	  	  </SignInSignUp>
       		  <SearchBar>
       		  </SearchBar>
     		</div>
