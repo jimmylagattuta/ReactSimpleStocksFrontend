@@ -59,7 +59,7 @@ class SignInSignUp extends Component {
 	   				console.log('temp_user');
 	   				console.log(temp_user);
 
-	   				user.push(temp_user);
+	   				// this.user.push(temp_user);
 	   			})
 	   			.catch(err => {alert(err)});
 	   	}
@@ -166,15 +166,12 @@ class SignInSignUp extends Component {
         		username_save.push(new_email);
         		console.log('this.username_save below');
         		console.log(username_save);
-   				this.username_save_mounted.push(username_save);
-   				console.log('this.mountd');
-   				console.log(this.username_save_mounted);
-        		// window.location = "http://localhost:3001";
+        		window.location = "http://localhost:3001";
 
        			// this.setStateFuncEmail(email);
        		})
    			.catch(err => {alert(err)});
-
+   			
        		// this.forceUpdate();
 
     }

@@ -12,7 +12,7 @@ class Portfolio extends Component {
 
 		this.state = { id: 0,
 					   activePort: false }
-
+					   this.setTheStateActive = this.setTheStateActive.bind(this);
 	}
 
 	componentWillMount() {
@@ -20,6 +20,7 @@ class Portfolio extends Component {
    		const userId = sessionStorage.getItem('userId');
    		console.log('userId below c.w.m port.js');
    		console.log(userId);
+   		const { handleSubmit } = this.props;
    		// const { portCheck } = this.props.portCheck;
    		// this.props.portCheck(userId);
    		const port_active = [];
@@ -32,18 +33,22 @@ class Portfolio extends Component {
 	   			.then(response => {
 	   				console.log('response below');
 	   				console.log(response.data);
-	   				port_active.push(response.data[0]['active']);
+	   				port_active.push(response.data[0]);
+	   				console.log('state.activePort below 1');
+	   				console.log(this.state.activePort);
+	   				// this.setState({ activePort: port_active });
+	   				console.log('state.activePort below 2');
+	   				console.log(this.state.activePort);
 	   				let temp_user = response.data[0]['user'];
 	   				console.log('temp_user');
 	   				console.log(temp_user);
-
+	   				this.setTheStateActive(port_active);
 	   				user.push(temp_user);
 	   			})
 	   			.catch(err => {alert(err)});
-	   			console.log('port_active below right here');
+	   			console.log('port_active below right here @_@ @_@');
 	   			console.log(port_active);
-	   			this.setState({ activePort: port_active });
-	   			console.log('state.activePort below');
+	   			console.log('state.activePort below 3');
 	   			console.log(this.state.activePort);
 	   			console.log('user email below');
 
@@ -54,6 +59,20 @@ class Portfolio extends Component {
    		// 	console.log('this.state.activePort below');
    		// 	console.log(this.state.activePort);
    		// };
+   	}
+
+   	setTheStateActive(array) {
+   		console.log('setTheStateActive');
+   		console.log('array below 0_0');
+   		const new_array = array[0]['active'];
+   		// console.log(array[0]['active']);
+
+
+	   	console.log('activePort below a');
+	   	console.log(this.state.activePort);
+   		this.setState({ activePort: new_array });
+	   	console.log('activePort below b');
+	   	console.log(this.state.activePort);
    	}
 
 	renderCashCapital(field) {
@@ -80,8 +99,12 @@ class Portfolio extends Component {
 		console.log('onSubmit');
 		console.log('values below');
 		console.log(values);
+		const userId = sessionStorage.getItem('userId');
+		console.log('userid here');
+		console.log(userId);
 
-		axios.post('http://localhost:3000/api/v1/portfolios/init', values)
+ 
+		axios.post('http://localhost:3000/api/v1/portfolios/init', { values, userId })
 			.then(payload => {
 				console.log('payload below');
 				console.log(payload.data);
@@ -89,6 +112,8 @@ class Portfolio extends Component {
 				window.location = "http://localhost:3001";
 			})
 			.catch(err => {alert(err)});
+			this.forceUpdate();
+
 	}
 
 	render() {
@@ -96,7 +121,7 @@ class Portfolio extends Component {
 		console.log('render port below @_@');
 		// console.log(port);
 		const { handleSubmit } = this.props;
-		if(this.state.id === 0 || this.state.id === null && this.state.activePort === false) {
+		if((this.state.id === 0 || this.state.id === null) && !(this.state.activePort)) {
 			return (
 				<div className="portfolio_top_right">
 					<div className="portfolio_top_right_content">
@@ -104,7 +129,7 @@ class Portfolio extends Component {
 					</div>
 				</div>
 			);
-		} else if(this.state.id > 0 && this.state.activePort === true) {
+		} else if(this.state.activePort) {
 			return (
 				<div className="portfolio_top_right">
 					<div className="portfolio_top_right_content">
@@ -112,7 +137,7 @@ class Portfolio extends Component {
 					</div>
 				</div>
 			);
-		} else if(this.state.id > 0 || this.state.id !== 0 && this.state.activePort === false) {
+		} else if((this.state.id > 0 || this.state.id !== 0) && !(this.state.activePort)) {
 			return (
 				<div className="portfolio_top_right">
 					<div className="portfolio_top_right_content">
