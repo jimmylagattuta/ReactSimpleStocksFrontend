@@ -2,8 +2,9 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-// import { portCheck } from '../actions';
+import { destroyPortfolio } from '../actions';
 import axios from 'axios';
+import DestroyPortfolio from './smallercomponents/destroy_portfolio';
 import './portfolio.css';
 
 class Portfolio extends Component {
@@ -16,69 +17,28 @@ class Portfolio extends Component {
 	}
 
 	componentWillMount() {
-		console.log('componentWillMount');
    		const userId = sessionStorage.getItem('userId');
-   		console.log('userId below c.w.m port.js');
-   		console.log(userId);
+   		const { destroyPortfolio } = this.props.destroyPortfolio;
    		const { handleSubmit } = this.props;
-   		// const { portCheck } = this.props.portCheck;
-   		// this.props.portCheck(userId);
-   		const port_active = [];
    		const user = [];
    		if(userId > 0) {
    			this.setState({ id: userId });
-   			console.log('state.id below c.w.m. port if userId > 0');
-   			console.log(this.state.id);
 	   		axios.post('http://localhost:3000/api/v1/port/port_check', { "id": userId })
 	   			.then(response => {
-	   				console.log('response below');
-	   				console.log(response.data);
-	   				port_active.push(response.data[0]);
-	   				console.log('state.activePort below 1');
-	   				console.log(this.state.activePort);
-	   				// this.setState({ activePort: port_active });
-	   				console.log('state.activePort below 2');
-	   				console.log(this.state.activePort);
-	   				let temp_user = response.data[0]['user'];
-	   				console.log('temp_user');
-	   				console.log(temp_user);
+	   				const port_active = response.data['active'];
+	   				let temp_user = response.data;
 	   				this.setTheStateActive(port_active);
-	   				user.push(temp_user);
 	   			})
 	   			.catch(err => {alert(err)});
-	   			console.log('port_active below right here @_@ @_@');
-	   			console.log(port_active);
-	   			console.log('state.activePort below 3');
-	   			console.log(this.state.activePort);
-	   			console.log('user email below');
-
    		};
-
-   		// if(userId === ) {
-   		// 	this.setState({ activePort: true });
-   		// 	console.log('this.state.activePort below');
-   		// 	console.log(this.state.activePort);
-   		// };
    	}
-
    	setTheStateActive(array) {
-   		console.log('setTheStateActive');
-   		console.log('array below 0_0');
-   		const new_array = array[0]['active'];
-   		// console.log(array[0]['active']);
-
-
-	   	console.log('activePort below a');
-	   	console.log(this.state.activePort);
+   		const new_array = array;
    		this.setState({ activePort: new_array });
-	   	console.log('activePort below b');
-	   	console.log(this.state.activePort);
    	}
-
 	renderCashCapital(field) {
 		const { meta: {touched, error} } = field
 		const className = `form-group ${ touched && error ? 'has-danger' : '' }`;
-
 		return (
 			<div className={className} id="field-form">
 				<label>{field.label}</label>
@@ -93,33 +53,18 @@ class Portfolio extends Component {
 				</div>
 			</div>
 		);
-	}
-
+	};
 	onSubmit(values) {
-		console.log('onSubmit');
-		console.log('values below');
-		console.log(values);
 		const userId = sessionStorage.getItem('userId');
-		console.log('userid here');
-		console.log(userId);
-
- 
 		axios.post('http://localhost:3000/api/v1/portfolios/init', { values, userId })
 			.then(payload => {
-				console.log('payload below');
-				console.log(payload.data);
-				alert('port initialized!');
 				window.location = "http://localhost:3001";
 			})
 			.catch(err => {alert(err)});
 			this.forceUpdate();
-
 	}
-
 	render() {
-		// const { port } = this.props;
-		console.log('render port below @_@');
-		// console.log(port);
+		const { destroyPortfolio } = this.props.destroyPortfolio;
 		const { handleSubmit } = this.props;
 		if((this.state.id === 0 || this.state.id === null) && !(this.state.activePort)) {
 			return (
@@ -134,6 +79,9 @@ class Portfolio extends Component {
 				<div className="portfolio_top_right">
 					<div className="portfolio_top_right_content">
 						<h2>Welcome {this.user}!</h2>
+						<div className="destroy_port">
+							<DestroyPortfolio destroyPortfolio={this.props.destroyPortfolio} />
+						</div>
 					</div>
 				</div>
 			);
@@ -155,11 +103,9 @@ class Portfolio extends Component {
 					</div>
 				</div>
 			);
-
 		}
 	};
 };
-
 function validate(values) {
 	const errors = {};
 	if (!values.cash_capital) {
@@ -170,10 +116,13 @@ function validate(values) {
 	}
 	return errors;
 }
-
+const mapStateToProps = (state) => {
+	const { destroyPortfolio } = state;
+	return { destroyPortfolio };
+}
 export default reduxForm({
 	validate,
 	form: 'initPortForm'
 })(
-	connect(null)(Portfolio)
+	connect(mapStateToProps, { destroyPortfolio })(Portfolio)
 );

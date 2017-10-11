@@ -12,9 +12,10 @@ class NewsColumn extends Component {
 		this.state = { news: [] }
 	}
 	componentWillMount() {
-		console.log('componentWillMount');
+		console.log('componentWillMount news');
 		const { getNews } = this.props;
 		const all_news = [];
+		//ACTIVATE BELOW!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		// this.props.getNews();
 		// this.apiCall();
 	}
@@ -42,11 +43,11 @@ class NewsColumn extends Component {
     		});
     		response.on('end', function() {
         		var company = JSON.parse(json);
-        		console.log(company);
+        		console.log('company news', company);
         		new_news.push(company['data']);
         		new_news.forEach((item) => {
         			more_news.push(item);
-        			console.log('more_news below');
+        			console.log('more_news below news');
         			console.log(more_news);
         		})
         		// console.log('json below');
@@ -55,7 +56,7 @@ class NewsColumn extends Component {
 
 		});
 		request.end();
-		console.log('more_news below @_@');
+		console.log('more_news below @_@ news');
 		console.log(more_news);
 		// new_news.forEach((item) => {
 		// 	console.log('item below');

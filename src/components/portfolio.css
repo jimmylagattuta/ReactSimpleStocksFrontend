@@ -15,3 +15,9 @@
   margin-right: 15px;
   height: 100%;
 }
+
+.destroy_port {
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+}

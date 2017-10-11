@@ -29,47 +29,27 @@ class SignInSignUp extends Component {
 	}
 
 	componentWillMount() {
-		console.log('componentWillMount');
    		const userId = sessionStorage.getItem('userId');
-   		console.log('userID below');
-   		console.log(userId);
-   		console.log('this.state.email below');
-   		console.log(this.state.email);
    		const username_save_mounted = [];
 	    if(userId > 0) {
-	    	console.log('userLive');
-	    	console.log(this.state.userLive);
 	       	this.setState({ userLive: true });
-	    	console.log('userLive');
-	    	console.log(this.state.userLive);
 	    }
-    	console.log('this username below');
-    	console.log(this.state.username);
    		const user = [];
    		if(userId > 0) {
    			this.setState({ id: userId });
-   			console.log('state.id below c.w.m. port if userId > 0');
-   			console.log(this.state.id);
 	   		axios.post('http://localhost:3000/api/v1/port/port_check', { "id": userId })
 	   			.then(response => {
-	   				console.log('response below');
-	   				console.log(response.data);
 	   				// port_active.push(response.data[0]['active']);
-	   				let temp_user = response.data[0]['user'];
-	   				console.log('temp_user');
-	   				console.log(temp_user);
+	   				let temp_user = response.data['user'];
 
 	   				// this.user.push(temp_user);
 	   			})
 	   			.catch(err => {alert(err)});
 	   	}
 	   	this.setState({ username: this.user });
-	   	console.log('this user below');
-	   	console.log(this.state.username);
 	}
 
 	onClickSignChange() {
-		console.log('onClickSignChange');
 		if(this.state.signIn === false) {
 			this.setState({ signIn: true });
 		} else if(this.state.signIn === true) {
@@ -79,7 +59,6 @@ class SignInSignUp extends Component {
 	}
 
 	onClickSignUpChange() {
-		console.log('onClickSignUpChange');
 		if(this.state.signUp === false) {
 			this.setState({ signUp: true });
 		} else if(this.state.signUp === true) {
@@ -87,25 +66,15 @@ class SignInSignUp extends Component {
 		}
 	}
 	onUserLive() {
-		console.log('onUserLive');
 		if(this.state.userLive === false) {
 			this.setState({ userLive: true });
 		} else if(this.state.userLive === true) {
 			this.setState({ userLive: false });
 		}
 	}
-	// setStateUser() {
-	// 	console.log('setStateUser');
-	// 	if(this.state.userLive === false) {
-	// 		this.setState({ userLive: true });
-	// 	} else if(this.state.userLive === true) {
-	// 		this.setState({ userLive: false });
-	// 	}
-	// }
     renderTextField(field) {
 	    const { meta: {touched, error} } = field
 	    const className = `form-group ${ touched && error ? 'has-danger' : '' }`;
-
 	    return (
 	      <div className={className} id="field-form">
 	        <label>{field.label}</label>
@@ -124,7 +93,6 @@ class SignInSignUp extends Component {
     renderPasswordField(field) {
 	    const { meta: {touched, error} } = field
 	    const className = `form-group ${ touched && error ? 'has-danger' : '' }`;
-
 	    return (
 	      <div className={className} id="field-form">
 	        <label>{field.label}</label>
@@ -141,13 +109,11 @@ class SignInSignUp extends Component {
 	    );
     }
     validSignin() {
-    	console.log('validSignin');
     	if(this.userId > 0) {
     		this.setState({ userLive: true });
     	}
     	this.forceUpdate();
     }
-
     onSubmit(values) {
     	const email = document.getElementById('email').value;
     	const password = document.getElementById('password').value;
@@ -155,43 +121,19 @@ class SignInSignUp extends Component {
     	let username_save = [];
     	axios.post('http://localhost:3000/api/v1/sessions', { email, password })
     		.then(response => {
-    			console.log('response below');
-    			console.log(response.data);
 		        sessionStorage.setItem('confirmed', response.data.confirmed_at);
 		    	sessionStorage.setItem('userId', response.data.id);
 		    	// sessionStorage.setItem('email', response.data.email);
         		new_email.push(response.data.email)
-        		console.log('new_email below');
-        		console.log(new_email);
         		username_save.push(new_email);
-        		console.log('this.username_save below');
-        		console.log(username_save);
         		window.location = "http://localhost:3001";
-
        			// this.setStateFuncEmail(email);
        		})
    			.catch(err => {alert(err)});
-   			
-       		// this.forceUpdate();
-
     }
-    // setStateFuncEmail(email) {
-   	// 	this.setState({ 'email': email });
-   	// 	console.log('email', this.state.email );
-    // }
-    // setStateFuncId(id) {
-   	// 	this.setState({ id: parseInt(id) });
-    // }
     onSubmitSignup(values) {
-    	console.log('onSubmitSignup');
-    	console.log('values below');
-    	console.log(values);
-   		// const userId = sessionStorage.getItem('userId');
-
    		axios.post('http://localhost:3000/api/v1/users', values)
    			.then(payload => {
-   				console.log('payload below');
-   				console.log(payload.data);
    				alert('user created, you can now sign up using you username');
    				window.location = "http://localhost:3001";
    			})
@@ -200,21 +142,16 @@ class SignInSignUp extends Component {
     }
     logOut() {
     	this.setState({ userLive: false });
-    	console.log('logOut');
 		axios.post('http://localhost:3000/api/v1/user_logout')
 			.then(response => {
 		    	sessionStorage.setItem('userId', response.data.id);
    				window.location = "http://localhost:3001";
-
 			})
    			.catch(err => {alert(err)});
    			this.forceUpdate();
-
     }
-
 	render() {
 	    const { handleSubmit } = this.props;
-
 		if(this.state.userLive === false && this.state.signIn === false && this.state.signUp === false) {
 			return (
 				<div className="signinsignup_top_left">
@@ -292,7 +229,6 @@ class SignInSignUp extends Component {
 		};
 	};
 };
-
 function validate(values) {
   const errors = {};
   if (!values.username) {
@@ -309,7 +245,6 @@ function validate(values) {
   }
   return errors;
 }
-
 export default reduxForm({
 	validate,
 	form: 'signUp',

@@ -16,21 +16,13 @@ class Homepage extends Component {
     this.state = { rerenderId: 0 }
   }
 	componentWillMount() {
-		console.log('sup yall');
     const userId = sessionStorage.getItem('userId');
 		const { fetchStocks, portCheck } = this.props;
 		this.props.fetchStocks();
-    console.log('homepage userId');
-    console.log(userId);
-
     if(userId !== 0 && userId !== null) {
       this.setState({ rerenderId: userId });
-      console.log('rerenderId below, userId is not equal t zero');
-      console.log(this.state.rerenderId);
     } else if(userId === null || userId === 0){
       this.setState({ rerenderId: 0 })
-      console.log('rerenderId is zero');
-      console.log(this.state.rerenderId);
     }
 	}
   	render() {
