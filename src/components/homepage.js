@@ -32,8 +32,7 @@ class Homepage extends Component {
     	  	<div className="Homepage">
     	  	  <SignInSignUp>
     	  	  </SignInSignUp>
-      		  <SearchBar>
-      		  </SearchBar>
+      		  <SearchBar fetchStocks={this.props.fetchStocks} />
             <Portfolio portCheck={this.props.portCheck} />
             <NewsColumn>
             </NewsColumn>
