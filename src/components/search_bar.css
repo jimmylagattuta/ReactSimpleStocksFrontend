@@ -19,7 +19,14 @@
 
 }
 
-#render_search p {
-  left: 0;
-  margin-bottom: 5px;
+#render_search #symbol span {
+  text-decoration: underline;
+  color: #ca7c08;
+  font-size: 120%;
+}
+
+#title_list {
+  font-size: 190%;
+  color: rgb(6, 114, 14);
+  margin-bottom: -10px;
 }

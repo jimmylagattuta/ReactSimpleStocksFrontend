@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { searchStock } from '../actions';
 import './search_bar.css';
-// import OneStockRender from './smallercomponents/one_stock_render';
+import OneStockRender from './smallercomponents/one_stock_render';
 import axios from 'axios';
 
 class SearchBar extends Component {
@@ -15,9 +15,7 @@ class SearchBar extends Component {
 					   search_boolean: false,
 					   searched_stock: []};
 
-		this.onInputChange = this.onInputChange.bind(this);
-		this.onFormSubmit = this.onFormSubmit.bind(this);
-		this.updatePage = this.updatePage.bind(this);
+
 	}
 	componentWillMount() {
 		const { searchStock } = this.props;
@@ -36,26 +34,6 @@ class SearchBar extends Component {
 		// this.props.fetchStocks();
 		// this.props.searchStock();
 	}
-	onInputChange(event) {
-		console.log(event.target.value);
-		this.setState({ term: event.target.value });
-	}
-	onFormSubmit(event) {
-		event.preventDefault();
-		// this.props.searchStock(this.state.term);
-		console.log('search_boolean below');
-		console.log(this.state.search_boolean);
-		this.props.searchStock(this.state.term).then(() => {
-			// console.log('search boolean below');
-			// this.setState({  });
-		});
-
-	}
-
-	updatePage() {
-		console.log('updatePage');
-
-	}
 
 	render() {
 		const { searchStock } = this.props;
@@ -63,17 +41,8 @@ class SearchBar extends Component {
 		return (
 			<div className="searchbar_middle_top">
 				<div className="searchbar_middle_top_content">
-					<form onSubmit={this.onFormSubmit} className="input-group">
-						<input 
-							placeholder="Enter Stock Symbol"
-							className="form-control"
-							value={this.state.term}
-							onChange={this.onInputChange}
-						/>
-						<span className="input-group-btn">
-							<button type="submit" className="btn btn-secondary">Submit</button>
-						</span>
-					</form>
+					<OneStockRender searchStock={this.props.searchStock} />
+					<p id="title_list">Stock List...</p>
 					{renderSearch(this.state.searched_stock)}
 				</div>
 			</div>
@@ -88,7 +57,7 @@ const renderSearch = (stock_traits) => {
 		return (
 			<div key={stock.id}>
 				<div id="render_search">
-					<p>Symbol: {stock['symbol']}</p>
+					<p id="symbol"><span>Symbol:</span> {stock['symbol']}</p>
 					<p>Company Name: {stock.company_name}</p>
 					<p>Asking Price: {stock.asking_price}</p>
 					<p>Bidding Price: {stock.bidding_price}</p>
@@ -104,28 +73,7 @@ const renderSearch = (stock_traits) => {
 	})
 };
 
-const renderSearchOneStock = (stock_traits) => {
-	console.log('stock_traits below renderSearchOneStock');
-	console.log(stock_traits);
-	return _.map(stock_traits, stock => {
-		return (
-			<div key={stock.id}>
-				<div id="render_search">
-					<p>Symbol: {stock['symbol']}</p>
-					<p>Company Name: {stock.company_name}</p>
-					<p>Asking Price: {stock.asking_price}</p>
-					<p>Bidding Price: {stock.bidding_price}</p>
-					<p>Days Percent: {stock.days_percent}</p>
-					<p>Day High: {stock.days_high}</p>
-					<p>Day Low: {stock.days_low}</p>
-					<p>Year High: {stock.year_high}</p>
-					<p>Year Low: {stock.years_low}</p>
-					<p>Average Daily Volume: {stock.average_daily_volume}</p>
-				</div>
-			</div>
-		);
-	})
-};
+
 
 const mapStateToProps = (state) => {
 	const { searchStock } = state;
