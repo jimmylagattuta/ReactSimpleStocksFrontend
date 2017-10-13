@@ -121,6 +121,7 @@ const renderSearch = (stock) => {
 				<p>Year High: {stock.year_high}</p>
 				<p>Year Low: {stock.years_low}</p>
 				<p>Average Daily Volume: {stock.average_daily_volume}</p>
+				<p id="delete_from_list">delete with id: {stock.id}</p>
 			</div>
 		</div>
 	);

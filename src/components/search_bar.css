@@ -30,3 +30,26 @@
   color: rgb(6, 114, 14);
   margin-bottom: -10px;
 }
+
+#loading {
+  border: 1px solid grey;
+  padding: 1px;
+  width: 100px;
+  text-align: center;
+  border-radius: 6px;
+}
+
+#form_to_delete {
+  float: right;
+  margin-right: 25px;
+  margin-top: -15px;
+}
+
+#form_to_delete_button {
+  float: right;
+}
+
+#delete_from_list {
+  font-size: 90%;
+  margin-bottom: 40px;
+}
