@@ -21,3 +21,27 @@
   bottom: 0;
   cursor: pointer;
 }
+
+.portfolio_top_right_content input {
+  float: right;
+  margin-top: -18px;
+  margin-right: -14px;
+  cursor: pointer;
+
+}
+
+#to_home_page input {
+  cursor: pointer;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  z-index: 15;
+
+}
+
+#port_page button {
+  margin-bottom: -20px;
+}

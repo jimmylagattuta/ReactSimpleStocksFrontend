@@ -23,6 +23,11 @@ class Port extends Component {
 				<TopRightPort />
 				<TopCenterPort />
 				<TopLeftPort />
+				<div id="to_home_page">						
+					<form action="http://localhost:3001">
+    					<input type="submit" value="Home Page" />
+					</form>
+				</div>
 				<BottomLeftPort />
 				<BottomCenterPort />
 				<BottomRightPort />

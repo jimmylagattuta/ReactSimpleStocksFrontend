@@ -78,6 +78,9 @@ class Portfolio extends Component {
 			return (
 				<div className="portfolio_top_right">
 					<div className="portfolio_top_right_content">
+						<form action="http://localhost:3001/port">
+    						<input type="submit" value="Port Page" />
+						</form>
 						<h2>Welcome {this.user}!</h2>
 						<div className="destroy_port">
 							<DestroyPortfolio destroyPortfolio={this.props.destroyPortfolio} />
