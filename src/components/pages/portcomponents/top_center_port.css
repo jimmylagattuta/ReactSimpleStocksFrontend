@@ -1,0 +1,19 @@
+.top_center_port {
+  text-align: center;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  top: 0px;
+  width: 400px;
+  height: 310px;
+  background-color: rgba(35, 194, 25, 0.29);
+  border: 1px solid black;
+}
+
+.top_center_port_content {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 15px;
+  height: 100%;
+}

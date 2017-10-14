@@ -11,6 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 
 import Homepage from './components/homepage';
+import Port from './components/pages/port';
 import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(promise, thunk)(createStore);
@@ -20,6 +21,7 @@ ReactDOM.render(
 	<BrowserRouter>
 		<div>
 			<Switch>
+		  		<Route path="/port" component={Port} />
 		  		<Route path="/" component={Homepage} />
 		  	</Switch>
 		 </div>

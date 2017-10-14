@@ -1,0 +1,21 @@
+.bottom_center_port {
+  position: fixed;
+  margin: 8px;
+  width: 400px;
+  height: 310px;
+  background-color: rgba(35, 194, 25, 0.29);
+  border: 1px solid black;
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+
+.bottom_center_port_content {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 15px;
+  height: 100%;
+}
