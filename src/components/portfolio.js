@@ -21,11 +21,24 @@ class Portfolio extends Component {
    		const { destroyPortfolio } = this.props.destroyPortfolio;
    		const { handleSubmit } = this.props;
    		const user = [];
+   		const portfolio = [];
+   		console.log('STARTS here');
+   		console.log('userId', userId);	
    		if(userId > 0) {
    			this.setState({ id: userId });
 	   		axios.post('http://localhost:3000/api/v1/port/port_check', { "id": userId })
 	   			.then(response => {
-	   				const port_active = response.data['active'];
+	   				console.log('response below');
+	   				console.log(response);
+	   				const port_active = response.data;
+	   				console.log('port_active underneeth me');
+	   				console.log(port_active);
+	   				console.log('postActive boolean below');
+	   				if(port_active.active === false) {
+	   					console.log('port_active is false');
+	   					this.setState({ activePort: false });
+	   				}
+
 	   				let temp_user = response.data;
 	   				this.setTheStateActive(port_active);
 	   			})
@@ -35,6 +48,9 @@ class Portfolio extends Component {
    	setTheStateActive(array) {
    		const new_array = array;
    		this.setState({ activePort: new_array });
+   		console.log('activePort below');
+   		console.log(this.state.activePort);
+
    	}
 	renderCashCapital(field) {
 		const { meta: {touched, error} } = field
@@ -66,7 +82,7 @@ class Portfolio extends Component {
 	render() {
 		const { destroyPortfolio } = this.props.destroyPortfolio;
 		const { handleSubmit } = this.props;
-		if((this.state.id === 0 || this.state.id === null) && !(this.state.activePort)) {
+		if((this.state.id === 0 || this.state.id === null)) {
 			return (
 				<div className="portfolio_top_right">
 					<div className="portfolio_top_right_content">
@@ -74,18 +90,20 @@ class Portfolio extends Component {
 					</div>
 				</div>
 			);
-		} else if(this.state.activePort) {
+		} else if(this.state.activePort['active'] !== false) {
 			return (
 				<div className="portfolio_top_right">
 					<div className="portfolio_top_right_content">
+						<form action="http://localhost:3001/port">
+    						<input type="submit" value="Port Page" />
+						</form>
 						<h2>Welcome {this.user}!</h2>
-						<div className="destroy_port">
-							<DestroyPortfolio destroyPortfolio={this.props.destroyPortfolio} />
-						</div>
+						{renderPortfolio(this.state.activePort)}
+						<DestroyPortfolio destroyPortfolio={this.props.destroyPortfolio} />
 					</div>
 				</div>
 			);
-		} else if((this.state.id > 0 || this.state.id !== 0) && !(this.state.activePort)) {
+		} else if((this.state.id > 0 || this.state.id !== 0) && !(this.state.activePort['active'])) {
 			return (
 				<div className="portfolio_top_right">
 					<div className="portfolio_top_right_content">
@@ -94,7 +112,7 @@ class Portfolio extends Component {
 							<p>Your Beginning Cash Capital Limit is $100,000</p>
 							<p>If You Are Succesfull, You Will Unlock Larger Limits</p> 
 							<Field
-								label="Cash Capital"
+								label="Add Cash Capital"
 								name="cash_capital"
 								component={this.renderCashCapital}
 							/>
@@ -115,6 +133,36 @@ function validate(values) {
 		errors.cash_capital = "Your Limit is $100,000!";
 	}
 	return errors;
+}
+const renderPortfolio = (traits) => {
+	console.log('traits');
+	console.log(traits);
+	return(
+		<div key={traits.id}>
+			<div id="render_search_portfolio">
+				<p><span>Stock Capital</span></p>
+				<p>{traits.stock_capital}</p>
+				<p><span>Cash</span></p>
+				<p>{traits.cash}</p>
+				<p><span>Days Percent</span></p>
+				<p>{traits.daily_stock_capital_percentage}</p>
+				<p><span>Days Dollar Change</span></p>
+				<p>{traits.days_dollar_change}</p>
+				<p><span>Months Percent</span></p>
+				<p>{traits.monthly_stock_capital_percentage}</p>
+				<p><span>Months Dollar Change</span></p>
+				<p>{traits.months_dollar_change}</p>
+				<p><span>Years Percent Change</span></p>
+				<p>{traits.yearly_stock_capital_percentage}</p>
+				<p><span>Years Dollar Change</span></p>
+				<p>{traits.years_dollar_change}</p>
+				<p><span>Investment Total</span></p>
+				<p>{traits.investment}</p>
+			</div>
+		</div>
+	);
+
+
 }
 const mapStateToProps = (state) => {
 	const { destroyPortfolio } = state;

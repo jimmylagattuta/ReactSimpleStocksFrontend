@@ -2,7 +2,7 @@
   /*position: fixed;*/
   left: 50%;
   margin: auto;
-  top: 0px;
+  margin-top: 108px;
   width: 360px;
   height: 240px;
   background-color: rgba(35, 194, 25, 0.29);
@@ -19,7 +19,37 @@
 
 }
 
-#render_search p {
-  left: 0;
-  margin-bottom: 5px;
+#render_search #symbol span {
+  text-decoration: underline;
+  color: #ca7c08;
+  font-size: 120%;
+}
+
+#title_list {
+  font-size: 190%;
+  color: rgb(6, 114, 14);
+  margin-bottom: -10px;
+}
+
+#loading {
+  border: 1px solid grey;
+  padding: 1px;
+  width: 100px;
+  text-align: center;
+  border-radius: 6px;
+}
+
+#form_to_delete {
+  float: right;
+  margin-right: 25px;
+  margin-top: -15px;
+}
+
+#form_to_delete_button {
+  float: right;
+}
+
+#delete_from_list {
+  font-size: 90%;
+  margin-bottom: 40px;
 }

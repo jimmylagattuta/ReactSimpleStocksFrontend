@@ -2,11 +2,13 @@
   right: 0%;
   position: fixed;
   margin: 8px;
-  top: 0px;
+  top: 100px;
   width: 350px;
   height: 240px;
   background-color: rgba(35, 194, 25, 0.29);
   border: 1px solid black;
+  overflow-x: auto;
+  overflow-y: scroll;
 }
 
 .portfolio_top_right_content {
@@ -17,7 +19,46 @@
 }
 
 .destroy_port {
-  position: absolute;
-  bottom: 0;
+/*  position: absolute;
+*/  bottom: 0;
   cursor: pointer;
+  float: right;
+}
+
+.portfolio_top_right_content input {
+    float: right;
+    margin-top: -1px;
+    margin-bottom: 5px;
+    margin-right: 72px;
+
+}
+
+.portfolio_top_right_content button {
+  margin-left: 200px;
+}
+
+#to_home_page input {
+  cursor: pointer;
+  top: 5px;
+  bottom: 0;
+  left: 50%;
+  right: 0;
+  /*margin: auto;*/
+  position: absolute;
+  z-index: 15;
+
+}
+
+#port_page button {
+  margin-bottom: -20px;
+}
+
+#render_search_portfolio span {
+  text-decoration: underline;
+  margin-bottom: -10px;
+}
+
+#render_search_portfolio {
+  overflow-x: auto;
+  overflow-y: scroll;
 }

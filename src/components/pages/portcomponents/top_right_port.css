@@ -1,0 +1,18 @@
+.top_right_port {
+  right: 0%;
+  position: fixed;
+  margin: 8px;
+  text-align: right;
+  top: 100px;
+  width: 400px;
+  height: 250px;
+  background-color: rgba(35, 194, 25, 0.29);
+  border: 1px solid black;
+}
+
+.top_right_port_content {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 15px;
+  height: 100%;
+}

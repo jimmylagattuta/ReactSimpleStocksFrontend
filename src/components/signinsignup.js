@@ -50,11 +50,10 @@ class SignInSignUp extends Component {
 	}
 
 	onClickSignChange() {
-		if(this.state.signIn === false) {
-			this.setState({ signIn: true });
-		} else if(this.state.signIn === true) {
 			this.setState({ signIn: false });
-		}
+			this.setState({ signUp: false });
+			this.setState({ userLive: false });
+
 
 	}
 
@@ -156,11 +155,20 @@ class SignInSignUp extends Component {
 			return (
 				<div className="signinsignup_top_left">
 					<div className="signinsignup_top_left_content">
-						<div onClick={this.onClickSignChange.bind(this)}>
-							<h3>Sign In!(click me)</h3>
-						</div>
-						<div onClick={this.onClickSignUpChange.bind(this)}>
-							<h3>Sign Up!(click me)</h3>
+						<div id="signing_in">
+							<div id="sign_in_dashes">-Sign In-</div>
+		    				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+		       	    			<div className="cred">
+		         					<p>Email:</p> <input type="text" id="email"/>
+				    			</div>
+			        			<div className="cred">
+		       						<p>Password:</p> <input type="password" id="password" />
+			        				<button className="btn btn-success" type="submit">Submit</button>
+		       					</div>
+							</form>
+							<div id="sign_up_main" onClick={this.onClickSignUpChange.bind(this)}>
+								<p>Sign Up!</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -171,7 +179,7 @@ class SignInSignUp extends Component {
 				<div className="signinsignup_top_left">
 					<div className="signinsignup_top_left_content">
 						<div onClick={this.onClickSignChange.bind(this)}>
-							<h3>Sign In!(click me)</h3>
+							<div>Sign In!(click me)</div>
 						</div>
 	    				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 	       	    			<div className="cred">
@@ -192,26 +200,31 @@ class SignInSignUp extends Component {
 				<div className="signinsignup_top_left">
 					<div className="signinsignup_top_left_content">
 						<div onClick={this.onClickSignUpChange.bind(this)}>
-							<h3>Sign Up!(click me)</h3>
+							<div id="sign_in_dashes">-Sign Up-</div>
 						</div>
-						<form onSubmit={handleSubmit(this.onSubmitSignup.bind(this))}>
-							<Field
-								label="Email "
-								name="email"
-								component={this.renderTextField}
-							/>
-							<Field 
-								label="Password "
-								name="password"
-								component={this.renderPasswordField}
-							/>
-							<Field
-								label="Password Confirmation "
-								name="password_confirmation"
-								component={this.renderPasswordField}
-							/>
-							<button className="btn btn-success" type="submit">Submit</button>
-						</form>
+						<div id="signing_up">
+							<form onSubmit={handleSubmit(this.onSubmitSignup.bind(this))}>
+								<Field
+									label="Email "
+									name="email"
+									component={this.renderTextField}
+								/>
+								<Field 
+									label="Password "
+									name="password"
+									component={this.renderPasswordField}
+								/>
+								<Field
+									label="Password Confirmation "
+									name="password_confirmation"
+									component={this.renderPasswordField}
+								/>
+								<button className="btn btn-success" type="submit">Submit</button>
+							</form>
+							<div id="sign_up_main" onClick={this.onClickSignChange.bind(this)}>
+								<p>Sign In!</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			);
