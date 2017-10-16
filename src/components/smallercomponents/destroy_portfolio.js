@@ -15,6 +15,7 @@ class DestroyPortfolio extends Component {
 		this.openDestroyTwo = this.openDestroyTwo.bind(this);
 		// this.destroyClick = this.destroyClick.bind(this);
 		this.falseAll = this.falseAll.bind(this);
+		this.makeInvisible = this.makeInvisible.bind(this);
 	}
 
 	componentWillMount() {
@@ -54,7 +55,11 @@ class DestroyPortfolio extends Component {
 			.catch(err => {alert(err)});
 
 	}
-
+	makeInvisible() {
+		console.log('makeInvisible');
+		this.setState({ visible_two: false });
+		this.setState({ visible: false });
+	}
 	falseAll() {
 		console.log('falseAll');
 			this.setState({
@@ -82,20 +87,19 @@ class DestroyPortfolio extends Component {
 			return (
 				<div className="destroy">
 					<h4>Are you sure you want to destroy your Portfolio? This cannot be undone.</h4>
-					<p onClick={this.openDestroyTwo}>Yes</p>
-					<p onClick={this.openDestroy}>No</p>
+					<p id="yes" onClick={this.openDestroyTwo}>Yes</p>
+					<p id="no" onClick={this.openDestroy}>No</p>
 				</div>
-
 			);
 		} else if(this.state.visible === true && this.state.visible_two === true) {
 			return (
-				<div className="destroy">
+				<div className="destroy_and_nevermind">
 					<h3 onClick={this.destroyClick.bind(this)}>***DESTROY PORTFOLIO***</h3>
+					<p id="nevermind" onClick={this.makeInvisible}>Nevermind</p>
 				</div>
 			);
 		}
 	}
 }
-
 
 export default DestroyPortfolio;

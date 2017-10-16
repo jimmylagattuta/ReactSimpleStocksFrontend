@@ -65,12 +65,12 @@ class SearchBar extends Component {
 							<div id="form_to_delete">
 								<form onSubmit={this.onSubmitDelete}>
 									<input
-										placeholder="Delete stock by id"
+										placeholder="Remove from list by id"
 										value={this.state.term}
 										onChange={this.onInputChange.bind(this)}
 									/>
 									<div id="form_to_delete_button">
-										<button className="btn btn-success" type="submit">Submit</button>
+										<button className="btn btn-success" type="submit">Remove</button>
 									</div>
 								</form>
 							</div>
@@ -91,7 +91,7 @@ class SearchBar extends Component {
 						<div id="form_to_delete">
 							<form onSubmit={this.onSubmitDelete}>
 								<input
-									placeholder="Delete stock by id"
+									placeholder="Remove from list by id"
 									value={this.state.term}
 									onChange={this.onInputChange.bind(this)}
 								/>

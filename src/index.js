@@ -12,6 +12,9 @@ import registerServiceWorker from './registerServiceWorker';
 
 import Homepage from './components/homepage';
 import Port from './components/pages/port';
+// import Admin from './components/pages/admin';
+// import User from './components/pages/user';
+// import Stock from'./components/pages/stock';
 import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(promise, thunk)(createStore);

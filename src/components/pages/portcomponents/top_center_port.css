@@ -4,9 +4,9 @@
   display: flex;
   justify-content: center;
   flex-direction: row;
-  top: 0px;
+  margin-top: 108px;
   width: 400px;
-  height: 310px;
+  height: 250px;
   background-color: rgba(35, 194, 25, 0.29);
   border: 1px solid black;
 }

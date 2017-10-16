@@ -1,12 +1,12 @@
 .bottom_right_port {
   right: 0px;
   width: 400px;
-  height: 310px;
+  height: 270px;
   background-color: rgba(35, 194, 25, 0.29);
   border: 1px solid black;
   position: absolute;
   margin: 8px;
-  bottom: 0px;
+  bottom: 50px;
   text-align: right;
 }
 
