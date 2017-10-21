@@ -6,6 +6,7 @@ export const DELETE_STOCK = 'delete_stock';
 export const GET_NEWS = 'get_news';
 export const PORT_CHECK = 'port_check';
 export const DESTROY_PORTFOLIO = 'destroy_portfolio';
+export const ADD_STOCKS = 'add_stocks';
 
 export const fetchStocks = () => {
  const request = axios.get('http://localhost:3000/api/v1/stocks');
@@ -56,5 +57,14 @@ export const destroyPortfolio = (id) => {
 	};
 };
 
+export const addStocks = (stocks) => {
+	const request = axios.post('http://localhost:3000/api/v1/port/add_to', { 'stocks': stocks });
+	console.log('request', request);
+	
+	return {
+		type: ADD_STOCKS,
+		payload: request
+	};
+};
 
 

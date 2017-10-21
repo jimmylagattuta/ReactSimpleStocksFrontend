@@ -18,6 +18,9 @@ class Portfolio extends Component {
 
 	componentWillMount() {
    		const userId = sessionStorage.getItem('userId');
+   		const portId = sessionStorage.getItem('portId');
+   		console.log('portId');
+   		console.log(portId);
    		const { destroyPortfolio } = this.props.destroyPortfolio;
    		const { handleSubmit } = this.props;
    		const user = [];
@@ -40,6 +43,7 @@ class Portfolio extends Component {
 	   				}
 
 	   				let temp_user = response.data;
+	  		    	sessionStorage.setItem('portId', response.data.id);
 	   				this.setTheStateActive(port_active);
 	   			})
 	   			.catch(err => {alert(err)});
@@ -97,7 +101,7 @@ class Portfolio extends Component {
 						<form action="http://localhost:3001/port">
     						<input type="submit" value="Port Page" />
 						</form>
-						<h2>Welcome {this.user}!</h2>
+						<h2>Last Portfolio Check</h2>
 						{renderPortfolio(this.state.activePort)}
 						<DestroyPortfolio destroyPortfolio={this.props.destroyPortfolio} />
 					</div>
@@ -141,23 +145,27 @@ const renderPortfolio = (traits) => {
 		<div key={traits.id}>
 			<div id="render_search_portfolio">
 				<p><span>Stock Capital</span></p>
-				<p>{traits.stock_capital}</p>
+				<p>${traits.stock_capital}</p>
 				<p><span>Cash</span></p>
-				<p>{traits.cash}</p>
+				<p>${traits.cash}</p>
 				<p><span>Days Percent</span></p>
-				<p>{traits.daily_stock_capital_percentage}</p>
+				<p>{traits.daily_stock_capital_percentage}%</p>
 				<p><span>Days Dollar Change</span></p>
-				<p>{traits.days_dollar_change}</p>
+				<p>${traits.days_dollar_change}</p>
 				<p><span>Months Percent</span></p>
-				<p>{traits.monthly_stock_capital_percentage}</p>
+				<p>{traits.monthly_stock_capital_percentage}%</p>
 				<p><span>Months Dollar Change</span></p>
-				<p>{traits.months_dollar_change}</p>
+				<p>${traits.months_dollar_change}</p>
 				<p><span>Years Percent Change</span></p>
-				<p>{traits.yearly_stock_capital_percentage}</p>
+				<p>{traits.yearly_stock_capital_percentage}%</p>
 				<p><span>Years Dollar Change</span></p>
-				<p>{traits.years_dollar_change}</p>
+				<p>${traits.years_dollar_change}</p>
+				<p><span>All Time Dollar Change</span></p>
+				<p>${traits.all_time_dollar}</p>
+				<p><span>All Time Percent Change</span></p>
+				<p>{traits.all_time_percent}%</p>
 				<p><span>Investment Total</span></p>
-				<p>{traits.investment}</p>
+				<p>${traits.investment}</p>
 			</div>
 		</div>
 	);

@@ -18,6 +18,10 @@
   height: 100%;
 }
 
+.portfolio_top_right_content h2 {
+  font-size: 140%;
+}
+
 .destroy_port {
 /*  position: absolute;
 */  bottom: 0;
@@ -30,7 +34,7 @@
     margin-top: -1px;
     margin-bottom: 5px;
     margin-right: 72px;
-
+    margin-right: 20px;
 }
 
 .portfolio_top_right_content button {
@@ -61,4 +65,5 @@
 #render_search_portfolio {
   overflow-x: auto;
   overflow-y: scroll;
+  margin-top: -20px;
 }

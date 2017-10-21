@@ -74,7 +74,7 @@ class SearchBar extends Component {
 									</div>
 								</form>
 							</div>
-						<p id="title_list">Your Stocks Today</p>
+						<p id="title_list">Your Stock List</p>
 							<h4 id="loading">Loading...</h4>
 						
 					</div>
@@ -100,7 +100,7 @@ class SearchBar extends Component {
 								</div>
 							</form>
 						</div>
-					<p id="title_list">Your Stocks Today</p>
+					<p id="title_list">Your Stock List</p>
 					{renderSearch(this.state.searched_stock)}
 				</div>
 			</div>
@@ -127,7 +127,7 @@ const renderSearch = (stock_traits) => {
 					<p>Day High: {stock.days_high}</p>
 					<p>Day Low: {stock.days_low}</p>
 					<p>Year High: {stock.year_high}</p>
-					<p>Year Low: {stock.years_low}</p>
+					<p>Year Low: {stock.year_low}</p>
 					<p>Average Daily Volume: {stock.average_daily_volume}</p>
 					<p id="delete_from_list">delete with id: {stock.id}</p>
 				</div>

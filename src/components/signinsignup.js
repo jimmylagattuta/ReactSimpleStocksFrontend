@@ -14,23 +14,21 @@ class SignInSignUp extends Component {
 		this.state = {  signIn: false,
 						signUp: false,
 						userLive: false,
-						username: [],
+						users_name: "",
 						id: 0
 					}
+
 		this.onClickSignChange = this.onClickSignChange.bind(this);
 		this.onClickSignUpChange = this.onClickSignUpChange.bind(this);
 		this.onUserLive = this.onUserLive.bind(this);
 		this.logOut = this.logOut.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
-		// this.onSubmit = this.onSubmit.bind(this);
-		// this.setStateUserName = this.setStateUserName.bind(this);
-		// this.setStateFuncEmail = this.setStateFuncEmail.bind(this);
-		// this.setStateFuncId = this.setStateFuncId.bind(this);
+		this.userName = this.userName.bind(this);
 	}
 
 	componentWillMount() {
    		const userId = sessionStorage.getItem('userId');
-   		const username_save_mounted = [];
+   		const username = [];
 	    if(userId > 0) {
 	       	this.setState({ userLive: true });
 	    }
@@ -40,13 +38,43 @@ class SignInSignUp extends Component {
 	   		axios.post('http://localhost:3000/api/v1/port/port_check', { "id": userId })
 	   			.then(response => {
 	   				// port_active.push(response.data[0]['active']);
-	   				let temp_user = response.data['user'];
+	   				let user = response.data['user'];
+	   				console.log('user', user);
+	   				username.push(user);
+	   				console.log('username here', username);
+	   				this.userName(username);
 
-	   				// this.user.push(temp_user);
 	   			})
 	   			.catch(err => {alert(err)});
 	   	}
-	   	this.setState({ username: this.user });
+	   	console.log('username here', username);
+	   	
+	}
+
+	userName(user) {
+		console.log('userName');
+		console.log('user', user);
+		let letter = user[0];
+		if(letter.includes('.')) {
+			console.log('CONDITIONAL');
+			let splitter = letter.split('.');
+			console.log('splitter', splitter);
+			console.log('to come back to');
+		}
+		console.log('letter', letter);
+		let first_letter = letter.slice(0, 1);
+		console.log('first_letter', first_letter);
+		let cap_letter = first_letter.toUpperCase();
+		// let new_name = 
+		console.log('cap_letter', cap_letter);
+		let lower_case = letter.slice(1);
+		console.log('lower_case', lower_case);
+		const brand_new_name = cap_letter + lower_case;
+		console.log('brand_new_name', brand_new_name);
+		console.log('this.state.users_name', this.state.users_name);
+		this.setState({ users_name: brand_new_name });
+		console.log('this.state.users_name', this.state.users_name);
+
 	}
 
 	onClickSignChange() {
@@ -151,6 +179,7 @@ class SignInSignUp extends Component {
     }
 	render() {
 	    const { handleSubmit } = this.props;
+	    console.log('this.state.users_name in render', this.state.users_name);
 		if(this.state.userLive === false && this.state.signIn === false && this.state.signUp === false) {
 			return (
 				<div className="signinsignup_top_left">
@@ -232,7 +261,10 @@ class SignInSignUp extends Component {
 			return (
 				<div className="signinsignup_top_left">
 					<div className="signinsignup_top_left_content">
-						<h1>Welcome {this.username_save_mounted}!</h1>
+						<h2>Welcome {this.state.users_name}!</h2>
+						<form id="go_to_user_page" action="http://localhost:3001/user">
+    						<input type="submit" value="User Page" />
+						</form>
 						<div onClick={this.logOut.bind(this)}>
 							<h3>Sign Out</h3>
 						</div>
