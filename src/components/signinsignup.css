@@ -46,6 +46,13 @@
 
 .signinsignup_top_left_content h3 {
   cursor: pointer;
+  margin-left: 40px;
+  border: solid 2px;
+  border-radius: 4px;
+  padding: 3px;
+  margin: 6px;
+  width: 80px;
+  text-align: center;
 }
 
 #sign_in_dashes {
@@ -91,4 +98,9 @@
 
 .signinsignup_top_left_content #signing_up label {
   margin-top: 20px;
+}
+
+#go_to_user_page input {
+  margin-top: 4px;
+  margin-right: 90px;
 }

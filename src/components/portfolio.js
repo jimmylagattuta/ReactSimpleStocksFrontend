@@ -18,6 +18,9 @@ class Portfolio extends Component {
 
 	componentWillMount() {
    		const userId = sessionStorage.getItem('userId');
+   		const portId = sessionStorage.getItem('portId');
+   		console.log('portId');
+   		console.log(portId);
    		const { destroyPortfolio } = this.props.destroyPortfolio;
    		const { handleSubmit } = this.props;
    		const user = [];
@@ -40,6 +43,7 @@ class Portfolio extends Component {
 	   				}
 
 	   				let temp_user = response.data;
+	  		    	sessionStorage.setItem('portId', response.data.id);
 	   				this.setTheStateActive(port_active);
 	   			})
 	   			.catch(err => {alert(err)});
@@ -74,6 +78,7 @@ class Portfolio extends Component {
 		const userId = sessionStorage.getItem('userId');
 		axios.post('http://localhost:3000/api/v1/portfolios/init', { values, userId })
 			.then(payload => {
+		    	sessionStorage.setItem('budget', payload.data.budget);
 				window.location = "http://localhost:3001";
 			})
 			.catch(err => {alert(err)});
@@ -97,7 +102,7 @@ class Portfolio extends Component {
 						<form action="http://localhost:3001/port">
     						<input type="submit" value="Port Page" />
 						</form>
-						<h2>Welcome {this.user}!</h2>
+						<h2>Last Portfolio Check</h2>
 						{renderPortfolio(this.state.activePort)}
 						<DestroyPortfolio destroyPortfolio={this.props.destroyPortfolio} />
 					</div>
@@ -137,27 +142,50 @@ function validate(values) {
 const renderPortfolio = (traits) => {
 	console.log('traits');
 	console.log(traits);
+	const integer_stock_capital = parseInt(traits.stock_capital);
+	const new_stock_capital = integer_stock_capital.toFixed(2);
+	const integer_cash = parseInt(traits.cash);
+	const new_cash = integer_cash.toFixed(2);
+	const integer_total_capital = parseInt(traits.total_capital);
+	const new_total_capital = integer_total_capital.toFixed(2);
+	const integer_dollar_change = parseInt(traits.days_dollar_change);
+	const new_dollar_change = integer_dollar_change.toFixed(2);
+	const integer_month_change = parseInt(traits.months_dollar_change);
+	const new_month_change = integer_month_change.toFixed(2);
+	const integer_year_change = parseInt(traits.years_dollar_change);
+	const new_year_change = integer_year_change.toFixed(2);
+	const integer_alltime_change = parseInt(traits.all_time_dollar);
+	const new_alltime_change = integer_alltime_change.toFixed(2);
+	const integer_investment = parseInt(traits.investment);
+	const new_investment = integer_investment.toFixed(2);
+
 	return(
 		<div key={traits.id}>
 			<div id="render_search_portfolio">
 				<p><span>Stock Capital</span></p>
-				<p>{traits.stock_capital}</p>
+				<p>${new_stock_capital}</p>
 				<p><span>Cash</span></p>
-				<p>{traits.cash}</p>
+				<p>${new_cash}</p>
+				<p><span>Total Capital</span></p>
+				<p>${new_total_capital}</p>
 				<p><span>Days Percent</span></p>
-				<p>{traits.daily_stock_capital_percentage}</p>
+				<p>{traits.daily_stock_capital_percentage}%</p>
 				<p><span>Days Dollar Change</span></p>
-				<p>{traits.days_dollar_change}</p>
+				<p>${new_dollar_change}</p>
 				<p><span>Months Percent</span></p>
-				<p>{traits.monthly_stock_capital_percentage}</p>
+				<p>{traits.monthly_stock_capital_percentage}%</p>
 				<p><span>Months Dollar Change</span></p>
-				<p>{traits.months_dollar_change}</p>
+				<p>${new_month_change}</p>
 				<p><span>Years Percent Change</span></p>
-				<p>{traits.yearly_stock_capital_percentage}</p>
+				<p>{traits.yearly_stock_capital_percentage}%</p>
 				<p><span>Years Dollar Change</span></p>
-				<p>{traits.years_dollar_change}</p>
+				<p>${new_year_change}</p>
+				<p><span>All Time Dollar Change</span></p>
+				<p>${new_alltime_change}</p>
+				<p><span>All Time Percent Change</span></p>
+				<p>{traits.all_time_percent}%</p>
 				<p><span>Investment Total</span></p>
-				<p>{traits.investment}</p>
+				<p>${new_investment}</p>
 			</div>
 		</div>
 	);

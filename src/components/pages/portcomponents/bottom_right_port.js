@@ -8,7 +8,6 @@ class BottomRightPort extends Component {
 	}
 
 	componentWillMount() {
-		console.log('componentWillMount');
 	}
 
 	render() {

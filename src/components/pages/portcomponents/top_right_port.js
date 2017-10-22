@@ -9,7 +9,6 @@ class TopRightPort extends Component {
 	}
 
 	componentWillMount() {
-		console.log('componentWillMount');
 	}
 
 	render() {
