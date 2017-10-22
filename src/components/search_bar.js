@@ -74,7 +74,7 @@ class SearchBar extends Component {
 									</div>
 								</form>
 							</div>
-						<p id="title_list">Your Stock List</p>
+						<p id="title_list">Stock List</p>
 							<h4 id="loading">Loading...</h4>
 						
 					</div>
@@ -100,7 +100,7 @@ class SearchBar extends Component {
 								</div>
 							</form>
 						</div>
-					<p id="title_list">Your Stock List</p>
+					<p id="title_list">Stock List</p>
 					{renderSearch(this.state.searched_stock)}
 				</div>
 			</div>

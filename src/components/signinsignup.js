@@ -150,6 +150,8 @@ class SignInSignUp extends Component {
     		.then(response => {
 		        sessionStorage.setItem('confirmed', response.data.confirmed_at);
 		    	sessionStorage.setItem('userId', response.data.id);
+		    	sessionStorage.setItem('budget', response.data.budget);
+		    	console.log('budget here', response.data.budget);
 		    	// sessionStorage.setItem('email', response.data.email);
         		new_email.push(response.data.email)
         		username_save.push(new_email);

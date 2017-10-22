@@ -25,6 +25,7 @@ class TopCenterPort extends Component {
 		this.stockCart = [];
 		if(this.state.stateStocks.length === 0 && this.state.cart.length === 0) {
 			this.props.fetchStocks().then((response) => {
+				console.log('~~>', response.payload.data);
 				this.stocks = response.payload.data;
 				// this.setState({ stateStocks: stocks });
 				if(this.state.boolean === false) {
@@ -67,7 +68,9 @@ class TopCenterPort extends Component {
 		// console.log('this.cart_of_stocks', cart_of_stocks);
 		console.log('this.stock_cart', this.stockCart);
 		if(!this.stockCart.includes(symbol + " ")) {
-			this.stockCart.push(symbol + " ");
+			if(this.stockCart.length === 0) {
+				this.stockCart.push(symbol + " ");
+			}
 		}
 		console.log('this.stock_cart', this.stockCart);
 		this.setState({ ready_to_buy: true });
@@ -86,9 +89,19 @@ class TopCenterPort extends Component {
 		this.props.addStocks(stocks_and_port_id).then((response) => {
 			console.log('addStocks sent, vary nyce', response.payload.data);
 		});
+		window.location = "http://localhost:3001/port";
 	}
 
 	render() {
+		// if(this.stockCart.length <= 0) {
+		// 	return (
+		// 		<div className="top_center_port">
+		// 			<div className="top_center_port_content">
+		// 				<h4 id="loading">Loading...</h4>
+		// 			</div>
+		// 		</div>
+		// 	);
+		// }
 		const { fetchStocks } = this.props;
 		if(this.stockCart.length > 0) {
 			return (
