@@ -89,10 +89,12 @@ class TopCenterPort extends Component {
 		this.props.addStocks(stocks_and_port_id).then((response) => {
 			console.log('addStocks sent, vary nyce', response.payload.data);
 		});
-		window.location = "http://localhost:3001/port";
+		window.location = "http://localhost:3001";
 	}
 
 	render() {
+		const portId = sessionStorage.getItem('portId');
+
 		// if(this.stockCart.length <= 0) {
 		// 	return (
 		// 		<div className="top_center_port">
@@ -103,7 +105,7 @@ class TopCenterPort extends Component {
 		// 	);
 		// }
 		const { fetchStocks } = this.props;
-		if(this.stockCart.length > 0) {
+		if((this.stockCart.length > 0) && (portId !== 'undefined')) {
 			return (
 				<div className="top_center_port">
 					<div className="top_center_port_content">
@@ -113,16 +115,24 @@ class TopCenterPort extends Component {
 					</div>
 				</div>
 			);
-		} else if(this.stockCart.length === 0) {
+		} else if((portId !== undefined)) {
 			return(
 				<div className="top_center_port">
 					<div className="top_center_port_content">
-						<div id="buy_component_title">Select Stocks to Buy Shares</div>
+						<div id="buy_component_title">Select Stocks to Buy Shares stockCart === 0</div>
 						{this.renderTheStocks(this.state.stateStocks)}
 					</div>
 				</div>
 			);
-		};
+		} else if(portId === 'undefined') {
+			return(
+				<div className="top_center_port">
+					<div className="top_center_port_content">
+						<h2>Start Your Port to Buy Stocks!</h2>
+					</div>
+				</div>
+			);
+		}
 	}
 }
 

@@ -139,7 +139,7 @@ class BottomCenterPort extends Component {
 			.catch(err => {alert(err)});
 		this.totalRender(package_to_send);
 		this.setState({ ready: false });
-		window.location = "http://localhost:3001/port";
+		window.location = "http://localhost:3001";
 
 
 	}
@@ -247,7 +247,7 @@ class BottomCenterPort extends Component {
 			return(
 				<div className="bottom_center_port">
 					<div className="bottom_center_port_content">
-						<h1>Quantity Component</h1>
+						<h1>Buy Selected Shares</h1>
 					</div>
 				</div>
 			);
