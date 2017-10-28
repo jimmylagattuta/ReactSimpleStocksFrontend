@@ -24,33 +24,33 @@ class SearchBar extends Component {
 		// this.props.fetchStocks();
 		axios.get('http://localhost:3000/api/v1/stocks')
 			.then(response => {
-				console.log('response.data below');
-				console.log(response.data);
+				// console.log('response.data below');
+				// console.log(response.data);
 				this.setState({ searched_stock: response.data });
-				console.log('searched_state below');
-				console.log(this.state.searched_stock);
+				// console.log('searched_state below');
+				// console.log(this.state.searched_stock);
 			});
-			console.log('this.fetched_stocks_array below H_H');
-			console.log(this.fetched_stocks_array);
+			// console.log('this.fetched_stocks_array below H_H');
+			// console.log(this.fetched_stocks_array);
 		// this.props.fetchStocks();
 		// this.props.searchStock();
 	}
 
 
 	onInputChange(event) {
-		console.log(event.target.value);
+		// console.log(event.target.value);
 		this.setState({ term: event.target.value });
 	}
 
 	onSubmitDelete(event) {
 		event.preventDefault();
-		console.log('onSubmitDelete');
-		console.log('state.term below');
-		console.log(this.state.term);
+		// console.log('onSubmitDelete');
+		// console.log('state.term below');
+		// console.log(this.state.term);
 		axios.post('http://localhost:3000/api/v1/stocks/delete_the_stock', { "stock_id": this.state.term })
 			.then(response => {
-				console.log('response below');
-				console.log(response.data);
+				// console.log('response below');
+				// console.log(response.data);
 				// this.setState({ delete_boolean: false });
 			});
 			window.location = "http://localhost:3001/"
@@ -109,12 +109,12 @@ class SearchBar extends Component {
 }
 
 const renderSearch = (stock_traits) => {
-	console.log('stock_traits below');
-	console.log(stock_traits);
+	// console.log('stock_traits below');
+	// console.log(stock_traits);
 	return _.map(stock_traits['stocks'], stock => {
 		const stock_id = stock.id
-		console.log('stock_id below');
-		console.log(stock_id);
+		// console.log('stock_id below');
+		// console.log(stock_id);
 
 		return (
 			<div key={stock.id}>

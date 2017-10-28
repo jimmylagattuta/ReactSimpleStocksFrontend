@@ -19,31 +19,32 @@ class Portfolio extends Component {
 	componentWillMount() {
    		const userId = sessionStorage.getItem('userId');
    		const portId = sessionStorage.getItem('portId');
-   		console.log('portId');
-   		console.log(portId);
+   		console.log('portId ', portId);
    		const { destroyPortfolio } = this.props.destroyPortfolio;
    		const { handleSubmit } = this.props;
    		const user = [];
    		const portfolio = [];
-   		console.log('STARTS here');
-   		console.log('userId', userId);	
+   		// console.log('STARTS here');
+   		// console.log('userId', userId);	
    		if(userId > 0) {
    			this.setState({ id: userId });
 	   		axios.post('http://localhost:3000/api/v1/port/port_check', { "id": userId })
 	   			.then(response => {
-	   				console.log('response below');
-	   				console.log(response);
+	   				// console.log('response below');
+	   				// console.log(response);
 	   				const port_active = response.data;
-	   				console.log('port_active underneeth me');
-	   				console.log(port_active);
-	   				console.log('postActive boolean below');
+	   				// console.log('port_active underneeth me');
+	   				// console.log(port_active);
+	   				// console.log('postActive boolean below');
 	   				if(port_active.active === false) {
-	   					console.log('port_active is false');
+	   					// console.log('port_active is false');
 	   					this.setState({ activePort: false });
 	   				}
 
 	   				let temp_user = response.data;
 	  		    	sessionStorage.setItem('portId', response.data.id);
+	  		    	const portId = sessionStorage.setItem('portId', response.data.id);
+	  		    	console.log('portId ', portId);
 	   				this.setTheStateActive(port_active);
 	   			})
 	   			.catch(err => {alert(err)});
@@ -52,8 +53,8 @@ class Portfolio extends Component {
    	setTheStateActive(array) {
    		const new_array = array;
    		this.setState({ activePort: new_array });
-   		console.log('activePort below');
-   		console.log(this.state.activePort);
+   		// console.log('activePort below');
+   		// console.log(this.state.activePort);
 
    	}
 	renderCashCapital(field) {
@@ -79,6 +80,8 @@ class Portfolio extends Component {
 		axios.post('http://localhost:3000/api/v1/portfolios/init', { values, userId })
 			.then(payload => {
 		    	sessionStorage.setItem('budget', payload.data.budget);
+		    	const budget = sessionStorage.setItem('budget', payload.data.budget);
+		    	console.log('budget ', budget);
 				window.location = "http://localhost:3001";
 			})
 			.catch(err => {alert(err)});

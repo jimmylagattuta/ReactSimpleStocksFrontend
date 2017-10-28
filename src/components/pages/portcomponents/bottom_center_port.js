@@ -23,10 +23,10 @@ class BottomCenterPort extends Component {
 	}
 
 	componentWillMount() {
-		console.log("Quantity");
+		// console.log("Quantity");
 		const string_budget = sessionStorage.getItem('budget');
 		const budget = parseInt(string_budget);
-		console.log('BUDGET HERE CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC', budget);
+		// console.log('BUDGET HERE CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC', budget);
 		const portId = sessionStorage.getItem('portId');
 		const { cartedStocks } = this.props;
    		const { handleSubmit } = this.props;
@@ -34,11 +34,11 @@ class BottomCenterPort extends Component {
 
 		this.props.cartedStocks(portId).then((response) => {
 			if(response.payload.data[0]) {
-				console.log('response id ~~>', response.payload.data[0].id);
+				// console.log('response id ~~>', response.payload.data[0].id);
 				const stocks_for_state = response.payload.data;
 				const stocks_for_state_first_parse = response.payload.data[0];
 				const stocks_for_state_second_parse = stocks_for_state_first_parse['symbol'];
-				console.log('stocks_for_state_second_parse here', stocks_for_state_second_parse);
+				// console.log('stocks_for_state_second_parse here', stocks_for_state_second_parse);
 				this.setState({ cart_boolean: true });
 				this.setState({ symbols: stocks_for_state_second_parse });
 				this.setState({ budget: budget });
@@ -50,10 +50,10 @@ class BottomCenterPort extends Component {
 			};
 			const pps = sessionStorage.getItem('pps');
 			this.setState({ price_per_share: pps });
-			console.log('state cart boolean', this.state.cart_boolean);
-			console.log('state symbols', this.state.symbols);
-			console.log('state budget', this.state.budget);
-			console.log('pps set here', this.pps);
+			// console.log('state cart boolean', this.state.cart_boolean);
+			// console.log('state symbols', this.state.symbols);
+			// console.log('state budget', this.state.budget);
+			// console.log('pps set here', this.pps);
 
 		});
 
@@ -67,7 +67,7 @@ class BottomCenterPort extends Component {
 
 
 	onInputChange(event) {
-		console.log(event.target.value);
+		// console.log(event.target.value);
 		this.setState({ term: event.target.value });
 	}
 
@@ -91,31 +91,31 @@ class BottomCenterPort extends Component {
 	};
 
 	onSubmitBuy(values) {
-		console.log('value below quantity', values);
+		// console.log('value below quantity', values);
    		const portId = sessionStorage.getItem('portId');
    		const string_budget = sessionStorage.getItem('budget');
 		const budget = parseInt(string_budget);
 		const pps_string = sessionStorage.getItem('pps');
 		const pps = parseInt(pps_string);
 
-		console.log('prt id and budget', portId, budget)
+		// console.log('prt id and budget', portId, budget)
 		const package_to_send = {
 			values: values,
 			portId: portId,
 			budget: budget,
 			pps: pps
 		}
-		console.log('package_to_send', package_to_send);
+		// console.log('package_to_send', package_to_send);
 		axios.post('http://localhost:3000/api/v1/port/buy_stocks', package_to_send)
 			.then(payload => {
-				console.log('payload', payload);	
+				// console.log('payload', payload);	
 			})
 			.catch(err => {alert(err)});
 		this.totalRender(package_to_send);
 	}
 
 	finalAPICall(values) {
-		console.log('value below quantity', values);
+		// console.log('value below quantity', values);
    		const portId = sessionStorage.getItem('portId');
    		const string_budget = sessionStorage.getItem('budget');
 		const budget = parseInt(string_budget);
@@ -123,7 +123,7 @@ class BottomCenterPort extends Component {
 		const pps = parseInt(pps_string);
 		const portStockId = sessionStorage.getItem('portStockId');
 
-		console.log('prt id and budget', portId, budget)
+		// console.log('prt id and budget', portId, budget)
 		const package_to_send = {
 			values: values,
 			portId: portId,
@@ -131,7 +131,7 @@ class BottomCenterPort extends Component {
 			pps: pps,
 			portStockId: portStockId
 		}
-		console.log('package_to_send', package_to_send);
+		// console.log('package_to_send', package_to_send);
 		axios.post('http://localhost:3000/api/v1/port/buy_stocks_finalize', package_to_send)
 			.then(payload => {
 				console.log('payload', payload);	
@@ -145,7 +145,7 @@ class BottomCenterPort extends Component {
 	}
 
 	totalRender(info) {
-		console.log('totalRender info', info);
+		// console.log('totalRender info', info);
    		const portId = sessionStorage.getItem('portId');
 		const quan = parseInt(info.values.quantity);
 		const pps_string = sessionStorage.getItem('pps');
@@ -153,11 +153,11 @@ class BottomCenterPort extends Component {
 		const before_commission_total = pps * quan;
  		const commission = before_commission_total * 0.05
 		const total = before_commission_total + commission
-		console.log('b4 TOTAL HERE :)))))', before_commission_total);
+		// console.log('b4 TOTAL HERE :)))))', before_commission_total);
 		const new_commission = commission.toFixed(2);
-		console.log('new_commision here', new_commission);
+		// console.log('new_commision here', new_commission);
 		const new_total = total.toFixed(2);
-		console.log('FINAL TOTAL HERE!!!!', new_total);
+		// console.log('FINAL TOTAL HERE!!!!', new_total);
 		const information = {
 			quantity: quan,
 			commission: new_commission,
@@ -165,14 +165,14 @@ class BottomCenterPort extends Component {
 			portId: portId
 		}
 		this.info_to_render = information;
-		console.log('info to render here', this.info_to_render);
+		// console.log('info to render here', this.info_to_render);
 		this.setState({ ready: true });
 	}
 
 
 	render() {
 	    const { handleSubmit } = this.props;
-		console.log('this.info_to_render in render', this.info_to_render);
+		// console.log('this.info_to_render in render', this.info_to_render);
 	    if (!this.state.symbols) {
 			<div className="bottom_center_port">
 				<div className="bottom_center_port_content">
@@ -180,7 +180,7 @@ class BottomCenterPort extends Component {
 				</div>
 			</div>
 	    } else {
-	    	console.log('this.state symbols', this.state.symbols);	    	
+	    	// console.log('this.state symbols', this.state.symbols);	    	
 	    }
 
 		if(this.state.cart_boolean && !this.state.ready) {
@@ -258,7 +258,7 @@ class BottomCenterPort extends Component {
 
 const renderCriteria = (info) => {
 	if(info) {
-		console.log('info renderCriteria', info);
+		// console.log('info renderCriteria', info);
 		const pps_string = sessionStorage.getItem('pps');
 		const almost_pps = parseInt(pps_string);
 		const new_pps = almost_pps.toFixed(2);
@@ -287,11 +287,11 @@ function validate(values) {
 	const pps_string = sessionStorage.getItem('pps');
 	const pps = parseInt(pps_string);
 	const portId = sessionStorage.getItem('portId');
-   	console.log('budget', budget);
-   	console.log('pps', pps);
-   	console.log('values quantity', values.quantity);
-   	console.log('values', values);
-   	console.log('CALCULATION', pps * values.quantity)
+   	// console.log('budget', budget);
+   	// console.log('pps', pps);
+   	// console.log('values quantity', values.quantity);
+   	// console.log('values', values);
+   	// console.log('CALCULATION', pps * values.quantity)
    	const info = {
    		pps: pps,
    		quantity: values.quantity,

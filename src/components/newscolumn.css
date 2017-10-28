@@ -13,6 +13,8 @@
   left: 0;
   right: 0;
   margin: auto;
+  overflow-x: auto;
+  overflow-y: scroll;
 }
 
 .newscolumn_center_bottom_content {
@@ -21,4 +23,8 @@
   margin-right: 15px;
   height: 100%;
   text-align: center;
+}
+
+#news {
+  margin: 5px;
 }
