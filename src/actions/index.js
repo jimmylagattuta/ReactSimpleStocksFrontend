@@ -70,6 +70,7 @@ export const addStocks = (stocks) => {
 };
 
 export const cartedStocks = (portId) => {
+	console.log('portId', portId);
 	const request = axios.post('http://localhost:3000/api/v1/port/retrieve_the_added_to', { data: portId });
 	console.log('request', request);
 

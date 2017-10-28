@@ -155,21 +155,21 @@ function renderNews(bigger_array) {
 	let new_date_boolean = false;
 	let slice_the_month = 0;
 	if (!bigger_array.length) {
-		console.log('TRIGGERED');
+		// console.log('TRIGGERED');
 	} else {
-		console.log('READY');
+		// console.log('READY');
 		return _.map(bigger_array, newer_array => {
 			// console.log('newer_array ', newer_array);
 			return _.map(newer_array, item => {
-				console.log('item READY ', item);
+				// console.log('item READY ', item);
 				if(!item.length) {
-					console.log('TRIGGERED SECOND LAYER');
+					// console.log('TRIGGERED SECOND LAYER');
 				} else {
-					console.log('READY SECOND LAYER');					
+					// console.log('READY SECOND LAYER');					
 					return _.map(item, x => {
 						let month = "";
 						const better_date = [];
-						console.log('x ', x);
+						// console.log('x ', x);
 						const date = x.publication_date.slice(0, 10);
 						// console.log('date', date);
 						const cut_date = x.publication_date.slice(0, 8);
@@ -179,13 +179,13 @@ function renderNews(bigger_array) {
 						const temp_date_two = temp_date - 1;
 						// console.log('temp_date_two', temp_date_two);
 						const accurate_date = cut_date.toString() + temp_date_two;
-						console.log('accurate_date', accurate_date);
+						// console.log('accurate_date', accurate_date);
 						const slice_the_day = accurate_date.slice(8, 10);
 						const slice_the_day_with_comma = slice_the_day + ', ';
 						const slice_the_month_unparsed = accurate_date.slice(5, 7);
-						console.log('slice_the_day', slice_the_day);
+						// console.log('slice_the_day', slice_the_day);
 						const slice_the_year = accurate_date.slice(0, 4);
-						console.log('slice_the_month!!!!!!!!!!!', slice_the_month_unparsed);
+						// console.log('slice_the_month!!!!!!!!!!!', slice_the_month_unparsed);
 						const slice_the_month = slice_the_month_unparsed;
 						if(slice_the_month === '1') {
 							const month = 'January ';
@@ -212,9 +212,9 @@ function renderNews(bigger_array) {
 						} else if(slice_the_month === '12') {
 							const month = 'December ';
 						};
-						console.log('month', month);
+						// console.log('month', month);
 						better_date.push(month + slice_the_day_with_comma + slice_the_year);
-						console.log('better_date', better_date);
+						// console.log('better_date', better_date);
 
 						// console.log('forEach item here', item)
 						if(date_array.includes(accurate_date)) {
@@ -234,7 +234,7 @@ function renderNews(bigger_array) {
 
 
 						if(new_date_boolean === true && date_count === 0) {
-							console.log('4');
+							// console.log('4');
 							// console.log('date_count old ', date_count);
 							date_count += 1;
 							// console.log('date_count new ', date_count);

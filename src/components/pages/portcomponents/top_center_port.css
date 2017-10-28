@@ -69,4 +69,19 @@
 
 #sendCart {
   cursor: pointer;
+/*  float: right;
+*/  margin-right: 280px;
+  margin-bottom: 20px;
+}
+
+#sell_stocks {
+  border: green dotted 3px;
+  border-radius: 1px;
+  padding: 5px;
+  margin: 6px;
+  width: 80px;
+  cursor: pointer;
+  margin-right: 10px;
+  text-align: center;
+  float: right;
 }

@@ -11,7 +11,9 @@ class TopCenterPort extends Component {
 					   cart: [],
 					   boolean: false,
 					   stocks_to_buy: [],
-					   ready_to_buy: false
+					   ready_to_buy: false,
+						sellStocks: false
+
 					}
 	
 		this.addCart = this.addCart.bind(this);
@@ -92,6 +94,16 @@ class TopCenterPort extends Component {
 		window.location = "http://localhost:3001";
 	}
 
+
+	onClickSell() {
+		console.log('onClickSell');
+		if(this.state.sellStocks) {
+			this.setState({ sellStocks: false });
+		} else {
+			this.setState({ sellStocks: true });
+		}
+	}
+
 	render() {
 		const portId = sessionStorage.getItem('portId');
 
@@ -105,30 +117,45 @@ class TopCenterPort extends Component {
 		// 	);
 		// }
 		const { fetchStocks } = this.props;
-		if((this.stockCart.length > 0) && (portId !== null)) {
-			return (
-				<div className="top_center_port">
-					<div className="top_center_port_content">
-						<div id="buy_component_title">Select Stocks to Buy Shares</div>
-						{this.renderTheStocks(this.state.stateStocks)}
-							<div id="stockCart">{this.stockCart}</div> <div id="sendCart"> <span onClick={() => {this.sendToBuyShare(this.stockCart)}}>Buy Shares</span></div>
+		if(!this.state.sellStocks) {
+
+			if((this.stockCart.length > 0) && (portId !== null)) {
+				return (
+					<div className="top_center_port">
+						<div className="top_center_port_content">
+							<div id="buy_component_title">Select Stocks to Buy</div>
+							{this.renderTheStocks(this.state.stateStocks)}
+								<div id="stockCart">{this.stockCart} ~> <span id="sendCart" onClick={() => {this.sendToBuyShare(this.stockCart)}}>Buy Shares</span></div>
+						</div>
 					</div>
-				</div>
-			);
-		} else if((portId !== null)) {
+				);
+			} else if((portId !== null)) {
+				return(
+					<div className="top_center_port">
+						<div className="top_center_port_content">
+							<p id="sell_stocks" onClick={this.onClickSell.bind(this)}> Sell </p>
+							<div id="buy_component_title">Select Stocks to Buy</div>
+							{this.renderTheStocks(this.state.stateStocks)}
+
+						</div>
+					</div>
+				);
+			} else if(portId === null) {
+				return(
+					<div className="top_center_port">
+						<div className="top_center_port_content">
+							<h2>Start Your Port to Buy Stocks!</h2>
+							<p id="sell_stocks" onClick={this.onClickSell.bind(this)}> Sell </p>
+						</div>
+					</div>
+				);
+			}
+		} else if(this.state.sellStocks) {
 			return(
 				<div className="top_center_port">
 					<div className="top_center_port_content">
-						<div id="buy_component_title">Select Stocks to Buy Shares stockCart === 0</div>
-						{this.renderTheStocks(this.state.stateStocks)}
-					</div>
-				</div>
-			);
-		} else if(portId === null) {
-			return(
-				<div className="top_center_port">
-					<div className="top_center_port_content">
-						<h2>Start Your Port to Buy Stocks!</h2>
+						<p id="sell_stocks" onClick={this.onClickSell.bind(this)}> Buy </p>
+						<h1>Sell Stocks!</h1>
 					</div>
 				</div>
 			);
