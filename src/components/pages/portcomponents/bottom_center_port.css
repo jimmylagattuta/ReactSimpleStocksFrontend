@@ -84,3 +84,7 @@ p #price_per_share {
 #total_render #shares_right {
   float: right;
 }
+
+#symbol_to_buy_shares_two {
+  float: right;
+}

@@ -24,11 +24,13 @@ class DestroyPortfolio extends Component {
 		if(userId > 0) {	
 			axios.post('http://localhost:3000/api/v1/port/port_check', { "id": userId })
 	   			.then(response => {
-	   			const placeholder = response['active'];
-	   			if(placeholder !== true) {
-	   				this.falseAll();
-	   			}
-	   		});
+	   				const placeholder = response['active'];
+	   				const budget = sessionStorage.setItem('budget', response.data.cash);
+	   				console.log('new budget ', response.data.cash);
+	   				if(placeholder !== true) {
+	   					this.falseAll();
+	   				}
+	   			});
 		}
 	}
 
@@ -51,6 +53,7 @@ class DestroyPortfolio extends Component {
 		axios.post('http://localhost:3000/api/v1/port/destroy', { 'id': userId })
 			.then(payload => {
 				window.location = "http://localhost:3001";
+				const portId = sessionStorage.setItem('portId', 0);
 			})
 			.catch(err => {alert(err)});
 

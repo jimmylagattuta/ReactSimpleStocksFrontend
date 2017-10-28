@@ -42,8 +42,11 @@ class BottomCenterPort extends Component {
 				this.setState({ cart_boolean: true });
 				this.setState({ symbols: stocks_for_state_second_parse });
 				this.setState({ budget: budget });
-				sessionStorage.setItem('pps', response.payload.data[0]['ask']);
-  		    	sessionStorage.setItem('portStockId', response.payload.data[0]['portStockId'])
+				const pps_unfixed = response.payload.data[0]['ask'];
+				// const pps_fixed = pps_unfixed.toFixed(2);
+				console.log('pps_unfixed ', pps_unfixed);
+				sessionStorage.setItem('pps', pps_unfixed);
+  		    	sessionStorage.setItem('portStockId', response.payload.data[0]['portStockId']);
 			}
 			 else {
 			 	this.setState({ cart_boolean: false });
@@ -95,8 +98,9 @@ class BottomCenterPort extends Component {
    		const portId = sessionStorage.getItem('portId');
    		const string_budget = sessionStorage.getItem('budget');
 		const budget = parseInt(string_budget);
-		const pps_string = sessionStorage.getItem('pps');
-		const pps = parseInt(pps_string);
+		const pps = sessionStorage.getItem('pps');
+		console.log('stupid ass pps', pps);
+		// const pps = parseInt(pps_string);
 
 		// console.log('prt id and budget', portId, budget)
 		const package_to_send = {
@@ -119,8 +123,7 @@ class BottomCenterPort extends Component {
    		const portId = sessionStorage.getItem('portId');
    		const string_budget = sessionStorage.getItem('budget');
 		const budget = parseInt(string_budget);
-		const pps_string = sessionStorage.getItem('pps');
-		const pps = parseInt(pps_string);
+		const pps = sessionStorage.getItem('pps');
 		const portStockId = sessionStorage.getItem('portStockId');
 
 		// console.log('prt id and budget', portId, budget)
@@ -215,7 +218,7 @@ class BottomCenterPort extends Component {
 				<div>
 					<div className="bottom_center_port">
 						<div className="bottom_center_port_content">
-							<h2 id="symbol_to_buy_shares">{this.state.symbols}
+							<h2 id="symbol_to_buy_shares_two">{this.state.symbols}
 							<p id="pps_to_buy_shares">price per share ${this.state.price_per_share}</p>
 							</h2>
 							<div id="finalize_form">
@@ -316,4 +319,3 @@ export default reduxForm({
 })(
 	connect(null)(BottomCenterPort)
 );
-
