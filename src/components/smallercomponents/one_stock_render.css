@@ -14,6 +14,10 @@
 	font-size: 110%;
 }
 
+.search_bar_render_content input {
+	width: 150px;
+}
+
 #title {
 	font-size: 160%;
 	color: green;

@@ -17,31 +17,36 @@ class OneStockRender extends Component {
 
 	}
 	componentWillMount() {
-		console.log('componentWillMount Searchbarrender');
+		// console.log('componentWillMount Searchbarrender');
 		const { searchStock } = this.props;
-		console.log('HERE IS THE SEARCHED STOCK');
-		console.log(this.state.searched_stock);
-		console.log('search boolean here mounted');
-		console.log(this.state.search);
+		// console.log('HERE IS THE SEARCHED STOCK');
+		// console.log(this.state.searched_stock);
+		// console.log('search boolean here mounted');
+		// console.log(this.state.search);
 	}
 
 	onInputChange(event) {
-		console.log(event.target.value);
+		// console.log(event.target.value);
 		this.setState({ term: event.target.value });
 	}
 	onFormSubmit(event) {
 		event.preventDefault();
 		// this.props.searchStock(this.state.term);
-		console.log('search_boolean below');
-		console.log(this.state.search_boolean);
+		// console.log('search_boolean below');
+		// console.log(this.state.search_boolean);
 		this.props.searchStock(this.state.term).then((response) => {
-			console.log('response below');
+			// console.log('response below');
 			console.log(response.payload.data);
-			this.setState({ searched_stock: response.payload.data });
-			this.setState({ search: true });
-			console.log('HERE IT IS AGAIN');
-			console.log(this.state.searched_stock);
-
+			if(response.payload.data.innie) {
+				alert('Symbol or Company Name Error');
+			} else if(response.payload.data.jsonSymbol) {
+				alert('Enter stock symbol ' + response.payload.data.jsonSymbol);
+			} else {
+				this.setState({ searched_stock: response.payload.data });
+				this.setState({ search: true });
+				// console.log('HERE IT IS AGAIN');
+				// console.log(this.state.searched_stock);
+			};
 		});
 
 	}
@@ -49,10 +54,10 @@ class OneStockRender extends Component {
 	render() {
 		const { searchStock } = this.props;
 		const stock = this.state.searched_stock;
-		console.log('AND AGAIN');
-		console.log(this.state.searched_stock);
-		console.log('search boolean here render');
-		console.log(this.state.search);
+		// console.log('AND AGAIN');
+		// console.log(this.state.searched_stock);
+		// console.log('search boolean here render');
+		// console.log(this.state.search);
 
 
 		if(this.state.search === false) {
@@ -61,7 +66,7 @@ class OneStockRender extends Component {
 					<div className="search_bar_render_content">
 						<form onSubmit={this.onFormSubmit} className="input-group">
 							<input 
-								placeholder="Enter Stock Symbol"
+								placeholder="Symbol or Company Name"
 								className="form-control"
 								value={this.state.term}
 								onChange={this.onInputChange.bind(this)}
@@ -105,8 +110,8 @@ class OneStockRender extends Component {
 }
 
 const renderSearch = (stock) => {
-	console.log('stock here');
-	console.log(stock);
+	// console.log('stock here');
+	// console.log(stock);
 	return (
 		<div key={stock.id}>
 			<div key="render_search_for_one_stock">

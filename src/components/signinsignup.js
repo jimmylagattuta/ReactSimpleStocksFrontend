@@ -39,9 +39,9 @@ class SignInSignUp extends Component {
 	   			.then(response => {
 	   				// port_active.push(response.data[0]['active']);
 	   				let user = response.data['user'];
-	   				console.log('user', user);
+	   				console.log('user ', user);
 	   				username.push(user);
-	   				console.log('username here', username);
+	   				// console.log('username here', username);
 	   				this.userName(username);
 
 	   			})
@@ -52,28 +52,28 @@ class SignInSignUp extends Component {
 	}
 
 	userName(user) {
-		console.log('userName');
-		console.log('user', user);
+		// console.log('userName');
+		// console.log('user', user);
 		let letter = user[0];
 		if(letter.includes('.')) {
-			console.log('CONDITIONAL');
+			// console.log('CONDITIONAL');
 			let splitter = letter.split('.');
-			console.log('splitter', splitter);
-			console.log('to come back to');
+			// console.log('splitter', splitter);
+			// console.log('to come back to');
 		}
-		console.log('letter', letter);
+		// console.log('letter', letter);
 		let first_letter = letter.slice(0, 1);
-		console.log('first_letter', first_letter);
+		// console.log('first_letter', first_letter);
 		let cap_letter = first_letter.toUpperCase();
 		// let new_name = 
-		console.log('cap_letter', cap_letter);
+		// console.log('cap_letter', cap_letter);
 		let lower_case = letter.slice(1);
-		console.log('lower_case', lower_case);
+		// console.log('lower_case', lower_case);
 		const brand_new_name = cap_letter + lower_case;
-		console.log('brand_new_name', brand_new_name);
-		console.log('this.state.users_name', this.state.users_name);
+		// console.log('brand_new_name', brand_new_name);
+		// console.log('this.state.users_name', this.state.users_name);
 		this.setState({ users_name: brand_new_name });
-		console.log('this.state.users_name', this.state.users_name);
+		// console.log('this.state.users_name', this.state.users_name);
 
 	}
 
@@ -151,7 +151,7 @@ class SignInSignUp extends Component {
 		        sessionStorage.setItem('confirmed', response.data.confirmed_at);
 		    	sessionStorage.setItem('userId', response.data.id);
 		    	sessionStorage.setItem('budget', response.data.budget);
-		    	console.log('budget here', response.data.budget);
+		    	// IMPLEMENT!!!
 		    	// sessionStorage.setItem('email', response.data.email);
         		new_email.push(response.data.email)
         		username_save.push(new_email);
@@ -181,7 +181,7 @@ class SignInSignUp extends Component {
     }
 	render() {
 	    const { handleSubmit } = this.props;
-	    console.log('this.state.users_name in render', this.state.users_name);
+	    // console.log('this.state.users_name in render', this.state.users_name);
 		if(this.state.userLive === false && this.state.signIn === false && this.state.signUp === false) {
 			return (
 				<div className="signinsignup_top_left">

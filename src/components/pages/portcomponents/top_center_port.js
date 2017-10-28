@@ -58,36 +58,36 @@ class TopCenterPort extends Component {
 	}
 
 	addCart(stock) {
-		console.log('addCart function running');
-		console.log('stock aside', stock);
+		// console.log('addCart function running');
+		// console.log('stock aside', stock);
 		const symbol = stock.symbol;
-		console.log('symbol below', symbol);
+		// console.log('symbol below', symbol);
 		// const cart_of_stocks = [];
 		// console.log('this.cart_of_stocks', cart_of_stocks);
 		// cart_of_stocks.push(stock.symbol);
 		// console.log('this.cart_of_stocks', cart_of_stocks);
-		console.log('this.stock_cart', this.stockCart);
+		// console.log('this.stock_cart', this.stockCart);
 		if(!this.stockCart.includes(symbol + " ")) {
 			if(this.stockCart.length === 0) {
 				this.stockCart.push(symbol + " ");
 			}
 		}
-		console.log('this.stock_cart', this.stockCart);
+		// console.log('this.stock_cart', this.stockCart);
 		this.setState({ ready_to_buy: true });
 	}
 
 	sendToBuyShare(stocks) {
-		console.log('sendToBuyShare');
+		// console.log('sendToBuyShare');
    		const portId = sessionStorage.getItem('portId');
-		console.log('stocks sendToBuyShare', stocks);
+		// console.log('stocks sendToBuyShare', stocks);
 		const stocks_and_port_id = {
 			stocks_by_symbol: stocks,
 			portId: portId
 		}
-		console.log('stocks_and_port_id below');
-		console.log(stocks_and_port_id);
+		// console.log('stocks_and_port_id below');
+		// console.log(stocks_and_port_id);
 		this.props.addStocks(stocks_and_port_id).then((response) => {
-			console.log('addStocks sent, vary nyce', response.payload.data);
+			// console.log('addStocks sent, vary nyce', response.payload.data);
 		});
 		window.location = "http://localhost:3001";
 	}
@@ -105,7 +105,7 @@ class TopCenterPort extends Component {
 		// 	);
 		// }
 		const { fetchStocks } = this.props;
-		if((this.stockCart.length > 0) && (portId !== 'undefined')) {
+		if((this.stockCart.length > 0) && (portId !== null)) {
 			return (
 				<div className="top_center_port">
 					<div className="top_center_port_content">
@@ -115,7 +115,7 @@ class TopCenterPort extends Component {
 					</div>
 				</div>
 			);
-		} else if((portId !== undefined)) {
+		} else if((portId !== null)) {
 			return(
 				<div className="top_center_port">
 					<div className="top_center_port_content">
@@ -124,7 +124,7 @@ class TopCenterPort extends Component {
 					</div>
 				</div>
 			);
-		} else if(portId === 'undefined') {
+		} else if(portId === null) {
 			return(
 				<div className="top_center_port">
 					<div className="top_center_port_content">
