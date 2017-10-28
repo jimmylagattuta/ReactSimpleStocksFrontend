@@ -48,6 +48,7 @@
 
 #form_to_delete_button {
   float: right;
+  /*margin-right: 200px;*/
 }
 
 #delete_from_list {
