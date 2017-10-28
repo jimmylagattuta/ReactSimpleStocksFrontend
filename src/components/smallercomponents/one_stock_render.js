@@ -36,7 +36,7 @@ class OneStockRender extends Component {
 		// console.log(this.state.search_boolean);
 		this.props.searchStock(this.state.term).then((response) => {
 			// console.log('response below');
-			console.log(response.payload.data);
+			// console.log(response.payload.data);
 			if(response.payload.data.innie) {
 				alert('Symbol or Company Name Error');
 			} else if(response.payload.data.jsonSymbol) {

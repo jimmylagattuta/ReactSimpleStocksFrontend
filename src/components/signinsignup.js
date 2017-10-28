@@ -47,7 +47,7 @@ class SignInSignUp extends Component {
 	   			})
 	   			.catch(err => {alert(err)});
 	   	}
-	   	console.log('username here', username);
+	   	// console.log('username here', username);
 	   	
 	}
 

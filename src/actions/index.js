@@ -8,6 +8,7 @@ export const PORT_CHECK = 'port_check';
 export const DESTROY_PORTFOLIO = 'destroy_portfolio';
 export const ADD_STOCKS = 'add_stocks';
 export const CARTED_STOCKS = 'carted_stocks';
+export const GET_SYMBOLS = 'get_symbols';
 
 export const fetchStocks = () => {
  const request = axios.get('http://localhost:3000/api/v1/stocks');
@@ -77,3 +78,13 @@ export const cartedStocks = (portId) => {
 		payload: request
 	};
 };
+
+export const getSymbols = () => {
+	const request = axios.get('http://localhost:3000/api/v1/stock_symbols/symbols');
+	// console.log('getSymbols request', request);
+
+	return { 
+		type: GET_SYMBOLS,
+		payload: request 
+	};
+}
