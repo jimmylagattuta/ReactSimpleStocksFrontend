@@ -9,6 +9,7 @@ import CartedStocks from './reducer_carted_stocks';
 import GetSymbols from './reducer_get_symbols';
 import GetStocks from './reducer_get_stocks';
 import StockToSell from './reducer_stock_to_sell';
+import FinalSell from './reducer_final_sell';
 
 const rootReducer = combineReducers({
 	form: formReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
 	cartedStocks: CartedStocks,
 	getSymbols: GetSymbols,
 	getStocks: GetStocks,
-	stockToSell: StockToSell
+	stockToSell: StockToSell,
+	finalSell: FinalSell
 });
 
 export default rootReducer;

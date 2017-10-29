@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell } from '../actions';
+import { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell, finalSell } from '../actions';
 import { connect } from 'react-redux';
 
 
@@ -19,7 +19,7 @@ class Homepage extends Component {
   }
 	componentWillMount() {
     const userId = sessionStorage.getItem('userId');
-		const { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell } = this.props;
+		const { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell, finalSell } = this.props;
 		this.props.fetchStocks();
     if(userId !== 0 && userId !== null) {
       this.setState({ rerenderId: userId });
@@ -28,7 +28,7 @@ class Homepage extends Component {
     }
 	}
   	render() {
-  		const { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell } = this.props;
+  		const { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell, finalSell } = this.props;
 
     	return (
     	  	<div className="Homepage">
@@ -38,7 +38,7 @@ class Homepage extends Component {
             <Portfolio portCheck={this.props.portCheck} />
             <NewsColumn>
             </NewsColumn>
-            <TopCenterPort fetchStocks={this.props.fetchStocks} addStocks={this.props.addStocks} getStocks={this.props.getStocks} stockToSell={this.props.stockToSell}/>
+            <TopCenterPort fetchStocks={this.props.fetchStocks} addStocks={this.props.addStocks} getStocks={this.props.getStocks} stockToSell={this.props.stockToSell} finalSell={this.props.finalSell}/>
             <BottomCenterPort cartedStocks={this.props.cartedStocks} />
     		</div>
     	);
@@ -46,8 +46,8 @@ class Homepage extends Component {
 }
 
 	const mapStateToProps = (state) => {
-		const { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell } = state;
-		return { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell };
+		const { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell, finalSell } = state;
+		return { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell, finalSell };
 	}
 
-export default connect(mapStateToProps, { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell })(Homepage);
+export default connect(mapStateToProps, { fetchStocks, portCheck, cartedStocks, addStocks, getStocks, stockToSell, finalSell })(Homepage);

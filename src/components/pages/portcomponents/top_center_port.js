@@ -25,7 +25,7 @@ class TopCenterPort extends Component {
 	}
 
 	componentWillMount() {
-		const { fetchStocks, addStocks, getStocks, stockToSell } = this.props;
+		const { fetchStocks, addStocks, getStocks, stockToSell, finalSell } = this.props;
 		this.stockCart = [];
 		if(this.state.stateStocks.length === 0 && this.state.cart.length === 0) {
 			this.props.fetchStocks().then((response) => {
@@ -108,7 +108,7 @@ class TopCenterPort extends Component {
 
 	render() {
 		const portId = sessionStorage.getItem('portId');
-		const { fetchStocks, getStocks, stockToSell } = this.props;
+		const { fetchStocks, getStocks, stockToSell, finalSell } = this.props;
 		const { handleSubmit } = this.props;
 
 		// if(this.stockCart.length <= 0) {
@@ -158,7 +158,7 @@ class TopCenterPort extends Component {
 				<div className="top_center_port">
 					<div className="top_center_port_content">
 							<p id="sell_stocks" onClick={this.onClickSell.bind(this)}> Buy </p>
-						<SellStocks getStocks={this.props.getStocks} stockToSell={this.props.stockToSell}/>
+						<SellStocks getStocks={this.props.getStocks} stockToSell={this.props.stockToSell} finalSell={this.props.finalSell} />
 					</div>
 				</div>
 			);

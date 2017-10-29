@@ -44,6 +44,8 @@ class Portfolio extends Component {
 	   				let temp_user = response.data;
 	  		    	sessionStorage.setItem('portId', response.data.id);
 	  		    	const portId = sessionStorage.setItem('portId', response.data.id);
+	  		    	const stock_capital = sessionStorage.setItem('stock_capital', response.data.stock_capital);
+
 	  		    	console.log('portId ', portId);
 	   				this.setTheStateActive(port_active);
 	   			})
