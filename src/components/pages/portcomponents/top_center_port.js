@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './top_center_port.css';
 
+import SellStocks from './small_port_components/sell_stocks';
+
 class TopCenterPort extends Component {
 	constructor(props) {
 		super(props);
@@ -23,11 +25,11 @@ class TopCenterPort extends Component {
 	}
 
 	componentWillMount() {
-		const { fetchStocks, addStocks } = this.props;
+		const { fetchStocks, addStocks, getStocks, stockToSell } = this.props;
 		this.stockCart = [];
 		if(this.state.stateStocks.length === 0 && this.state.cart.length === 0) {
 			this.props.fetchStocks().then((response) => {
-				console.log('~~>', response.payload.data);
+				// console.log('~~>', response.payload.data);
 				this.stocks = response.payload.data;
 				// this.setState({ stateStocks: stocks });
 				if(this.state.boolean === false) {
@@ -96,7 +98,7 @@ class TopCenterPort extends Component {
 
 
 	onClickSell() {
-		console.log('onClickSell');
+		// console.log('onClickSell');
 		if(this.state.sellStocks) {
 			this.setState({ sellStocks: false });
 		} else {
@@ -106,6 +108,8 @@ class TopCenterPort extends Component {
 
 	render() {
 		const portId = sessionStorage.getItem('portId');
+		const { fetchStocks, getStocks, stockToSell } = this.props;
+		const { handleSubmit } = this.props;
 
 		// if(this.stockCart.length <= 0) {
 		// 	return (
@@ -116,14 +120,13 @@ class TopCenterPort extends Component {
 		// 		</div>
 		// 	);
 		// }
-		const { fetchStocks } = this.props;
 		if(!this.state.sellStocks) {
 
 			if((this.stockCart.length > 0) && (portId !== null)) {
 				return (
 					<div className="top_center_port">
 						<div className="top_center_port_content">
-							<div id="buy_component_title">Select Stocks to Buy</div>
+							<div id="buy_component_title">Buy</div>
 							{this.renderTheStocks(this.state.stateStocks)}
 								<div id="stockCart">{this.stockCart} ~> <span id="sendCart" onClick={() => {this.sendToBuyShare(this.stockCart)}}>Buy Shares</span></div>
 						</div>
@@ -134,7 +137,7 @@ class TopCenterPort extends Component {
 					<div className="top_center_port">
 						<div className="top_center_port_content">
 							<p id="sell_stocks" onClick={this.onClickSell.bind(this)}> Sell </p>
-							<div id="buy_component_title">Select Stocks to Buy</div>
+							<div id="buy_component_title">Buy</div>
 							{this.renderTheStocks(this.state.stateStocks)}
 
 						</div>
@@ -154,8 +157,8 @@ class TopCenterPort extends Component {
 			return(
 				<div className="top_center_port">
 					<div className="top_center_port_content">
-						<p id="sell_stocks" onClick={this.onClickSell.bind(this)}> Buy </p>
-						<h1>Sell Stocks!</h1>
+							<p id="sell_stocks" onClick={this.onClickSell.bind(this)}> Buy </p>
+						<SellStocks getStocks={this.props.getStocks} stockToSell={this.props.stockToSell}/>
 					</div>
 				</div>
 			);

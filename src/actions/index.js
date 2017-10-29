@@ -9,6 +9,8 @@ export const DESTROY_PORTFOLIO = 'destroy_portfolio';
 export const ADD_STOCKS = 'add_stocks';
 export const CARTED_STOCKS = 'carted_stocks';
 export const GET_SYMBOLS = 'get_symbols';
+export const GET_STOCKS = 'get_stocks';
+export const STOCK_TO_SELL = 'stock_to_sell';
 
 export const fetchStocks = () => {
  const request = axios.get('http://localhost:3000/api/v1/stocks');
@@ -72,7 +74,7 @@ export const addStocks = (stocks) => {
 export const cartedStocks = (portId) => {
 	console.log('portId', portId);
 	const request = axios.post('http://localhost:3000/api/v1/port/retrieve_the_added_to', { data: portId });
-	console.log('request', request);
+	// console.log('request', request);
 
 	return {
 		type: CARTED_STOCKS,
@@ -88,4 +90,22 @@ export const getSymbols = () => {
 		type: GET_SYMBOLS,
 		payload: request 
 	};
-}
+};
+
+export const getStocks = (portId) => {
+	// console.log('portId for get stocks', portId);
+	const request = axios.post('http://localhost:3000/api/v1/port_stocks/get_stocks', { data: portId });
+	return {
+		type: GET_STOCKS,
+		payload: request
+	};
+};
+
+export const stockToSell = (portId) => {
+	console.log('stockToSell ACTION');
+	const request = axios.post('http://localhost:3000/api/v1/port_stocks/to_sell', { data: portId });
+	return {
+		type: STOCK_TO_SELL,
+		payload: request
+	};
+};

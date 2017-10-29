@@ -7,6 +7,8 @@ import PortCheckReducer from './reducer_port_check';
 import DestroyPortfolio from './reducer_destroy_portfolio';
 import CartedStocks from './reducer_carted_stocks';
 import GetSymbols from './reducer_get_symbols';
+import GetStocks from './reducer_get_stocks';
+import StockToSell from './reducer_stock_to_sell';
 
 const rootReducer = combineReducers({
 	form: formReducer,
@@ -16,7 +18,9 @@ const rootReducer = combineReducers({
 	portCheck: PortCheckReducer,
 	destroyPortfolio: DestroyPortfolio,
 	cartedStocks: CartedStocks,
-	getSymbols: GetSymbols
+	getSymbols: GetSymbols,
+	getStocks: GetStocks,
+	stockToSell: StockToSell
 });
 
 export default rootReducer;
