@@ -1,0 +1,14 @@
+#onclicktosell  {
+	cursor: pointer;
+}
+#onclicktosell #floatrightsell {
+	float: right;
+	border: solid 1px;
+  	border-radius: 2px;
+  	padding: 2px;
+  	margin: px;
+}
+
+#onclicktosell #floatleftsell {
+	float: left;
+}

@@ -80,6 +80,7 @@ class Portfolio extends Component {
 		axios.post('http://localhost:3000/api/v1/portfolios/init', { values, userId })
 			.then(payload => {
 		    	sessionStorage.setItem('budget', payload.data.budget);
+		    	sessionStorage.setItem('stock_capital', payload.data.stock_capital);
 		    	const budget = sessionStorage.setItem('budget', payload.data.budget);
 		    	console.log('budget ', budget);
 				window.location = "http://localhost:3001";
